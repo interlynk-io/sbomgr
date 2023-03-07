@@ -1,0 +1,100 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:4da3920f-cb90-4f98-aa70-07661e5ef78f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2022-12-14T09:09:32+00:00",
+    "tools": [
+      {
+        "vendor": "aquasecurity",
+        "name": "trivy",
+        "version": "0.35.0"
+      }
+    ],
+    "component": {
+      "bom-ref": "78a9ee03-420e-41e1-923a-8363047a21f7",
+      "type": "application",
+      "name": "https://github.com/lyft/cartography",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:SchemaVersion",
+          "value": "2"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:pypi/m2r2@0.3.2",
+      "type": "library",
+      "name": "m2r2",
+      "version": "0.3.2",
+      "purl": "pkg:pypi/m2r2@0.3.2",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/sphinx@4.3.0",
+      "type": "library",
+      "name": "sphinx",
+      "version": "4.3.0",
+      "purl": "pkg:pypi/sphinx@4.3.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/sphinx-material@0.0.35",
+      "type": "library",
+      "name": "sphinx-material",
+      "version": "0.0.35",
+      "purl": "pkg:pypi/sphinx-material@0.0.35",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "761ac551-132c-404e-9d45-1b8973f1f99e",
+      "type": "application",
+      "name": "docs/requirements.txt",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:Type",
+          "value": "pip"
+        },
+        {
+          "name": "aquasecurity:trivy:Class",
+          "value": "lang-pkgs"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "761ac551-132c-404e-9d45-1b8973f1f99e",
+      "dependsOn": [
+        "pkg:pypi/m2r2@0.3.2",
+        "pkg:pypi/sphinx@4.3.0",
+        "pkg:pypi/sphinx-material@0.0.35"
+      ]
+    },
+    {
+      "ref": "78a9ee03-420e-41e1-923a-8363047a21f7",
+      "dependsOn": [
+        "761ac551-132c-404e-9d45-1b8973f1f99e"
+      ]
+    }
+  ],
+  "vulnerabilities": []
+}

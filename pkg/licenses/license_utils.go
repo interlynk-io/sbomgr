@@ -1,0 +1,82 @@
+package licenses
+
+import (
+	"sort"
+	"strings"
+)
+
+type license struct {
+	name       string
+	short      string
+	deprecated bool
+}
+
+func (l license) Short() string {
+	return l.short
+}
+
+func (l license) Name() string {
+	return l.name
+}
+
+func (l license) Deprecated() bool {
+	return l.deprecated
+}
+
+func (l license) ValidSpdxLicense() bool {
+	return l.name != ""
+
+}
+func NewLicenseFromID(lic string) []License {
+	// The incoming license string could be a
+	// - A SPDX short license ID
+	// - A SPDX license expression
+	// - A proprietary license id
+
+	//NONE and NOASSERTION should be treated as
+	// no license
+	lcs := []License{}
+
+	licenseLower := strings.ToLower(lic)
+
+	if licenseLower == "none" || licenseLower == "noassertion" {
+		return lcs
+	}
+
+	allLicenses := getIndividualLicenses(licenseLower)
+
+	for _, l := range allLicenses {
+		meta, ok := LookUp(l)
+		if ok {
+			lcs = append(lcs, meta)
+		}
+	}
+	return lcs
+}
+
+// taken from https://github.com/spdx/tools-golang/blob/main/idsearcher/idsearcher.go#L208
+func getIndividualLicenses(lic string) []string {
+	// replace parens and '+' with spaces
+	lic = strings.Replace(lic, "(", " ", -1)
+	lic = strings.Replace(lic, ")", " ", -1)
+	lic = strings.Replace(lic, "+", " ", -1)
+	lic = strings.Replace(lic, ",", " ", -1) //changed from original
+
+	// now, split by spaces, trim, and add to slice
+	licElements := strings.Split(lic, " ")
+	lics := []string{}
+	for _, elt := range licElements {
+		elt := strings.TrimSpace(elt)
+		// don't add if empty or if case-insensitive operator
+		if elt == "" || strings.EqualFold(elt, "AND") ||
+			strings.EqualFold(elt, "OR") || strings.EqualFold(elt, "WITH") {
+			continue
+		}
+
+		lics = append(lics, elt)
+	}
+
+	// sort before returning
+	sort.Strings(lics)
+	return lics
+}

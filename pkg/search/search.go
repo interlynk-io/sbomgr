@@ -4,80 +4,75 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package search
 
-import "context"
+import (
+	"os"
 
-type SearchParams struct {
-	Ctx  context.Context
-	Path string
+	"github.com/interlynk-io/sbomgr/pkg/detect"
+	"github.com/interlynk-io/sbomgr/pkg/search/options"
+	"github.com/interlynk-io/sbomgr/pkg/search/results"
+)
 
-	//optionals
-	Name string
-	CPE  string
-	PURL string
-
-	Exclude bool
-	Direct  bool
-}
-
-type Option func(sp *SearchParams)
-
-func WithName(name string) Option {
-	return func(sp *SearchParams) {
-		sp.Name = name
+func searchFunc(path string, o options.SearchOptions) *results.Result {
+	f, err := os.Open(path)
+	if err != nil {
+		return &results.Result{
+			Path:  path,
+			Error: err.Error(),
+		}
 	}
-}
+	defer f.Close()
 
-func WithCpe(cpe string) Option {
-	return func(sp *SearchParams) {
-		sp.CPE = cpe
-	}
-}
-
-func WithPurl(purl string) Option {
-	return func(sp *SearchParams) {
-		sp.PURL = purl
-	}
-}
-
-func WithExclude(exclude bool) Option {
-	return func(sp *SearchParams) {
-		sp.Exclude = exclude
-	}
-}
-
-func WithDirect(direct bool) Option {
-	return func(sp *SearchParams) {
-		sp.Direct = direct
-	}
-}
-
-func NewSearchParams(ctx context.Context, path string, opts ...Option) *SearchParams {
-	sp := &SearchParams{
-		Ctx:  ctx,
-		Path: path,
+	sbomSpecFormat, fileFormat, err := detect.Detect(f)
+	if err != nil {
+		return &results.Result{
+			Path:  path,
+			Error: err.Error(),
+		}
 	}
 
-	for _, opt := range opts {
-		opt(sp)
+	if o.SpdxOnly() {
+		if sbomSpecFormat != detect.SBOMSpecSPDX {
+			return &results.Result{
+				Path:  path,
+				Error: "not an SPDX document",
+			}
+		}
 	}
 
-	return sp
-}
+	if o.CdxOnly() {
+		if sbomSpecFormat != detect.SBOMSpecCDX {
+			return &results.Result{
+				Path:  path,
+				Error: "not a CycloneDX document",
+			}
+		}
+	}
 
-type SearchResults struct {
-	paths []string
-}
+	ro := options.NewRuntimeOptions()
+	ro.CurrentPath = path
+	ro.SbomSpecType = sbomSpecFormat
+	ro.SbomFileFormat = fileFormat
+	ro.File = f
 
-func (sp SearchParams) Search() (*SearchResults, error) {
-	return nil, nil
+	sm := search_mods[sbomSpecFormat]
+	sm.SetRuntimeOptions(ro)
+	sm.SetSearchOptions(o)
+
+	sr, err := sm.Search()
+	if err != nil {
+		return &results.Result{
+			Path:  path,
+			Error: err.Error(),
+		}
+	}
+	return sr
 }

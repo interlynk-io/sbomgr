@@ -1,0 +1,61 @@
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: https://github.com/lyft/cartography
+DocumentNamespace: http://aquasecurity.github.io/trivy/repository/https://github.com/lyft/cartography-e5bab2f3-e2ec-4831-9677-5be9a039ca6e
+Creator: Organization: aquasecurity
+Creator: Tool: trivy
+Created: 2022-12-14T09:09:36.706209Z
+
+##### Package: pip
+
+PackageName: pip
+SPDXID: SPDXRef-Application-547f4b32b4b380e9
+FilesAnalyzed: false
+PackageSourceInfo: docs/requirements.txt
+
+##### Package: sphinx-material
+
+PackageName: sphinx-material
+SPDXID: SPDXRef-Package-7c9681a6e31c6aa6
+PackageVersion: 0.0.35
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/sphinx-material@0.0.35
+
+##### Package: sphinx
+
+PackageName: sphinx
+SPDXID: SPDXRef-Package-d421474ac9cfb965
+PackageVersion: 4.3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/sphinx@4.3.0
+
+##### Package: m2r2
+
+PackageName: m2r2
+SPDXID: SPDXRef-Package-f4653a70ce444464
+PackageVersion: 0.3.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/m2r2@0.3.2
+
+##### Package: https://github.com/lyft/cartography
+
+PackageName: https://github.com/lyft/cartography
+SPDXID: SPDXRef-Repository-cdb6f6823ac09a9e
+FilesAnalyzed: false
+PackageAttributionText: SchemaVersion: 2
+
+##### Relationships
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-Repository-cdb6f6823ac09a9e
+Relationship: SPDXRef-Repository-cdb6f6823ac09a9e CONTAINS SPDXRef-Application-547f4b32b4b380e9
+Relationship: SPDXRef-Application-547f4b32b4b380e9 CONTAINS SPDXRef-Package-f4653a70ce444464
+Relationship: SPDXRef-Application-547f4b32b4b380e9 CONTAINS SPDXRef-Package-d421474ac9cfb965
+Relationship: SPDXRef-Application-547f4b32b4b380e9 CONTAINS SPDXRef-Package-7c9681a6e31c6aa6
+

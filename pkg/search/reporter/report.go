@@ -12,38 +12,49 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package logger
+package reporter
 
 import (
 	"context"
-
-	"go.uber.org/zap"
 )
 
-var logger *zap.SugaredLogger
+type Report struct {
+	Ctx context.Context
 
-type logKey struct{}
-
-func init() {
-	l, _ := zap.NewProduction()
-	//l, _ := zap.NewDevelopment()
-	defer l.Sync()
-
-	logger = l.Sugar()
+	//optionals
+	Direct   bool
+	Stats    bool
+	Licenses bool
 }
 
-func WithLogger(ctx context.Context) context.Context {
-	return context.WithValue(ctx, logKey{}, logger)
+type Option func(r *Report)
+
+func WithDirect(direct bool) Option {
+	return func(r *Report) {
+		r.Direct = direct
+	}
 }
 
-func WithLoggerAndCancel(ctx context.Context) (context.Context, context.CancelFunc) {
-	return context.WithCancel(context.WithValue(ctx, logKey{}, logger))
+func WithStats(stats bool) Option {
+	return func(r *Report) {
+		r.Stats = stats
+	}
 }
 
-func FromContext(ctx context.Context) *zap.SugaredLogger {
-	if logger, ok := ctx.Value(logKey{}).(*zap.SugaredLogger); ok {
-		return logger
+func WithLicenses(licenses bool) Option {
+	return func(r *Report) {
+		r.Licenses = licenses
+	}
+}
+
+func NewReport(ctx context.Context, opts ...Option) *Report {
+	r := &Report{
+		Ctx: ctx,
 	}
 
-	return zap.NewNop().Sugar()
+	for _, opt := range opts {
+		opt(r)
+	}
+
+	return r
 }

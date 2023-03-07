@@ -1,0 +1,105 @@
+{
+	"SPDXID": "SPDXRef-DOCUMENT",
+	"creationInfo": {
+		"created": "2022-12-14T09:09:34.702824Z",
+		"creators": [
+			"Tool: trivy",
+			"Organization: aquasecurity"
+		]
+	},
+	"dataLicense": "CC0-1.0",
+	"documentDescribes": [
+		"SPDXRef-Repository-cdb6f6823ac09a9e"
+	],
+	"documentNamespace": "http://aquasecurity.github.io/trivy/repository/https://github.com/lyft/cartography-9b9c53ad-46b5-4401-92ed-3b50da79dd7b",
+	"name": "https://github.com/lyft/cartography",
+	"packages": [
+		{
+			"SPDXID": "SPDXRef-Application-547f4b32b4b380e9",
+			"filesAnalyzed": false,
+			"name": "pip",
+			"sourceInfo": "docs/requirements.txt"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-7c9681a6e31c6aa6",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:pypi/sphinx-material@0.0.35",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "sphinx-material",
+			"versionInfo": "0.0.35"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-d421474ac9cfb965",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:pypi/sphinx@4.3.0",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "sphinx",
+			"versionInfo": "4.3.0"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-f4653a70ce444464",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:pypi/m2r2@0.3.2",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "m2r2",
+			"versionInfo": "0.3.2"
+		},
+		{
+			"SPDXID": "SPDXRef-Repository-cdb6f6823ac09a9e",
+			"attributionTexts": [
+				"SchemaVersion: 2"
+			],
+			"filesAnalyzed": false,
+			"name": "https://github.com/lyft/cartography"
+		}
+	],
+	"relationships": [
+		{
+			"relatedSpdxElement": "SPDXRef-Repository-cdb6f6823ac09a9e",
+			"relationshipType": "DESCRIBES",
+			"spdxElementId": "SPDXRef-DOCUMENT"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Application-547f4b32b4b380e9",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Repository-cdb6f6823ac09a9e"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-f4653a70ce444464",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-547f4b32b4b380e9"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-d421474ac9cfb965",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-547f4b32b4b380e9"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-7c9681a6e31c6aa6",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-547f4b32b4b380e9"
+		}
+	],
+	"spdxVersion": "SPDX-2.2"
+}
