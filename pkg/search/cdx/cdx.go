@@ -19,24 +19,13 @@ import (
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
 )
 
-type CdxModule struct {
-	ro *options.RuntimeOptions
-	so options.SearchOptions
-}
+type CdxModule struct{}
 
-func (c *CdxModule) SetRuntimeOptions(ro *options.RuntimeOptions) {
-	c.ro = ro
-}
-
-func (c *CdxModule) SetSearchOptions(so options.SearchOptions) {
-	c.so = so
-}
-
-func (c *CdxModule) Search() (*results.Result, error) {
+func (c *CdxModule) Search(ro *options.RuntimeOptions, opts options.SearchOptions) (*results.Result, error) {
 	return &results.Result{
-		Path:           c.ro.CurrentPath,
-		Format:         string(c.ro.SbomFileFormat),
-		Spec:           string(c.ro.SbomSpecType),
+		Path:           ro.CurrentPath,
+		Format:         string(ro.SbomFileFormat),
+		Spec:           string(ro.SbomSpecType),
 		ProductName:    "cdxtest",
 		ProductVersion: "1.0",
 		Packages:       []results.Package{},

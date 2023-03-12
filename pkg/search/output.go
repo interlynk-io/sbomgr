@@ -17,8 +17,11 @@ package search
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
+	tw "github.com/olekukonko/tablewriter"
 )
 
 func outputQuiet(r *results.Result, nr *SearchParams) error {
@@ -53,9 +56,39 @@ func outputBasic(r *results.Result, nr *SearchParams) error {
 		return fmt.Errorf("no match found")
 	}
 
+	data := [][]string{}
+
 	for _, pkg := range r.Packages {
-		fmt.Println(r.Path, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version, pkg.PURL)
+		p := []string{}
+		if !nr.DoFilename() {
+			p = append(p, r.Path)
+		}
+		p = append(p, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version, pkg.PURL)
+		if nr.DoLicense() {
+			var b []string
+			for _, l := range pkg.Licenses {
+				b = append(b, l.Name())
+			}
+			p = append(p, strings.Join(b, ","))
+		}
+		//fmt.Println(r.Path, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version, pkg.PURL)
+		data = append(data, p)
 	}
+
+	table := tw.NewWriter(os.Stdout)
+	table.SetAutoWrapText(true)
+	table.SetAutoFormatHeaders(true)
+	table.SetHeaderAlignment(tw.ALIGN_RIGHT)
+	table.SetCenterSeparator("")
+	table.SetColumnSeparator("")
+	table.SetRowSeparator("")
+	table.SetHeaderLine(false)
+	table.SetBorder(false)
+	table.SetTablePadding(" ")
+	table.SetNoWhiteSpace(true)
+	table.AppendBulk(data)
+	table.Render()
+
 	return nil
 }
 
