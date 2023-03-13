@@ -1,0 +1,1454 @@
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: https://github.com/knqyf263/trivy-ci-test
+DocumentNamespace: http://aquasecurity.github.io/trivy/repository/https://github.com/knqyf263/trivy-ci-test-2c12b155-f8d0-4ea4-972e-13392140e941
+Creator: Organization: aquasecurity
+Creator: Tool: trivy
+Created: 2022-12-14T09:08:00.279996Z
+
+##### Package: cargo
+
+PackageName: cargo
+SPDXID: SPDXRef-Application-226d03fb18dfe129
+FilesAnalyzed: false
+PackageSourceInfo: Cargo.lock
+
+##### Package: pipenv
+
+PackageName: pipenv
+SPDXID: SPDXRef-Application-a7d170ab39c108ae
+FilesAnalyzed: false
+PackageSourceInfo: Pipfile.lock
+
+##### Package: normal
+
+PackageName: normal
+SPDXID: SPDXRef-Package-128079c0951a99f8
+PackageVersion: 0.1.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/normal@0.1.0
+
+##### Package: string_cache_shared
+
+PackageName: string_cache_shared
+SPDXID: SPDXRef-Package-141b5a22d97a55bf
+PackageVersion: 0.3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/string_cache_shared@0.3.0
+
+##### Package: rand_xorshift
+
+PackageName: rand_xorshift
+SPDXID: SPDXRef-Package-169150f76064cfc1
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_xorshift@0.1.1
+
+##### Package: gprof2dot
+
+PackageName: gprof2dot
+SPDXID: SPDXRef-Package-1915fe3b72a0edc6
+PackageVersion: 2016.10.13
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/gprof2dot@2016.10.13
+
+##### Package: python-crontab
+
+PackageName: python-crontab
+SPDXID: SPDXRef-Package-1b7142ac6921224
+PackageVersion: 2.3.6
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/python-crontab@2.3.6
+
+##### Package: tornado
+
+PackageName: tornado
+SPDXID: SPDXRef-Package-1dc9be568cf7f2e9
+PackageVersion: 5.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/tornado@5.1.1
+
+##### Package: djangorestframework-jwt
+
+PackageName: djangorestframework-jwt
+SPDXID: SPDXRef-Package-1e524f52c5d18946
+PackageVersion: 1.11.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/djangorestframework-jwt@1.11.0
+
+##### Package: django
+
+PackageName: django
+SPDXID: SPDXRef-Package-1f4c40e5cb41fefe
+PackageVersion: 2.0.9
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django@2.0.9
+
+##### Package: pytz
+
+PackageName: pytz
+SPDXID: SPDXRef-Package-1f81a1a3a7916995
+PackageVersion: 2019.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pytz@2019.1
+
+##### Package: pyjwt
+
+PackageName: pyjwt
+SPDXID: SPDXRef-Package-1fa8bdd53d20113c
+PackageVersion: 1.7.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pyjwt@1.7.1
+
+##### Package: idna
+
+PackageName: idna
+SPDXID: SPDXRef-Package-20804fe1191d5b54
+PackageVersion: 0.1.5
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/idna@0.1.5
+
+##### Package: jmespath
+
+PackageName: jmespath
+SPDXID: SPDXRef-Package-2662f4498c2ab359
+PackageVersion: 0.9.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/jmespath@0.9.4
+
+##### Package: django-extensions
+
+PackageName: django-extensions
+SPDXID: SPDXRef-Package-2df229366d17505b
+PackageVersion: 2.1.6
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-extensions@2.1.6
+
+##### Package: utf-8
+
+PackageName: utf-8
+SPDXID: SPDXRef-Package-31499d72668be4d4
+PackageVersion: 0.7.5
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/utf-8@0.7.5
+
+##### Package: redis
+
+PackageName: redis
+SPDXID: SPDXRef-Package-3240d2de640a47e
+PackageVersion: 3.2.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/redis@3.2.1
+
+##### Package: html5ever
+
+PackageName: html5ever
+SPDXID: SPDXRef-Package-3488ac47ef25761d
+PackageVersion: 0.23.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/html5ever@0.23.0
+
+##### Package: rand
+
+PackageName: rand
+SPDXID: SPDXRef-Package-36e910b313f474d3
+PackageVersion: 0.4.6
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand@0.4.6
+
+##### Package: unicode-xid
+
+PackageName: unicode-xid
+SPDXID: SPDXRef-Package-3721d8e465fcaec9
+PackageVersion: 0.1.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/unicode-xid@0.1.0
+
+##### Package: phf_codegen
+
+PackageName: phf_codegen
+SPDXID: SPDXRef-Package-37b7e07d52e43928
+PackageVersion: 0.7.24
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/phf_codegen@0.7.24
+
+##### Package: oauth2
+
+PackageName: oauth2
+SPDXID: SPDXRef-Package-39f0d148ef8f46d7
+PackageVersion: 1.9.0.post1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/oauth2@1.9.0.post1
+
+##### Package: winapi
+
+PackageName: winapi
+SPDXID: SPDXRef-Package-3a60bfeca7c3d4f6
+PackageVersion: 0.3.7
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/winapi@0.3.7
+
+##### Package: itoa
+
+PackageName: itoa
+SPDXID: SPDXRef-Package-3b5b80599260b50a
+PackageVersion: 0.4.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/itoa@0.4.4
+
+##### Package: serde_derive
+
+PackageName: serde_derive
+SPDXID: SPDXRef-Package-3d9ccdbca52614d3
+PackageVersion: 1.0.91
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/serde_derive@1.0.91
+
+##### Package: django-redis-cache
+
+PackageName: django-redis-cache
+SPDXID: SPDXRef-Package-3f0ad943854be2d0
+PackageVersion: 2.0.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-redis-cache@2.0.0
+
+##### Package: botocore
+
+PackageName: botocore
+SPDXID: SPDXRef-Package-4367aef58bd19cf3
+PackageVersion: 1.12.130
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/botocore@1.12.130
+
+##### Package: flower
+
+PackageName: flower
+SPDXID: SPDXRef-Package-44a58ba9540e69f9
+PackageVersion: 0.9.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/flower@0.9.3
+
+##### Package: string_cache_codegen
+
+PackageName: string_cache_codegen
+SPDXID: SPDXRef-Package-485e0b2473a215f6
+PackageVersion: 0.4.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/string_cache_codegen@0.4.2
+
+##### Package: walkdir
+
+PackageName: walkdir
+SPDXID: SPDXRef-Package-4bb384d3fa15beaa
+PackageVersion: 1.0.7
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/walkdir@1.0.7
+
+##### Package: user32-sys
+
+PackageName: user32-sys
+SPDXID: SPDXRef-Package-514023c4fe9b55d1
+PackageVersion: 0.2.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/user32-sys@0.2.0
+
+##### Package: log
+
+PackageName: log
+SPDXID: SPDXRef-Package-531dac4ae8358110
+PackageVersion: 0.4.6
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/log@0.4.6
+
+##### Package: ryu
+
+PackageName: ryu
+SPDXID: SPDXRef-Package-53288fc25e8380ea
+PackageVersion: 0.2.8
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/ryu@0.2.8
+
+##### Package: rand_core
+
+PackageName: rand_core
+SPDXID: SPDXRef-Package-538130b9e67663bb
+PackageVersion: 0.4.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_core@0.4.0
+
+##### Package: vine
+
+PackageName: vine
+SPDXID: SPDXRef-Package-55d9648375680e39
+PackageVersion: 1.3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/vine@1.3.0
+
+##### Package: django-celery-beat
+
+PackageName: django-celery-beat
+SPDXID: SPDXRef-Package-55eba067914c4b28
+PackageVersion: 1.4.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-celery-beat@1.4.0
+
+##### Package: hiredis
+
+PackageName: hiredis
+SPDXID: SPDXRef-Package-560ce77f2890a37d
+PackageVersion: 1.0.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/hiredis@1.0.0
+
+##### Package: mac
+
+PackageName: mac
+SPDXID: SPDXRef-Package-5658b1c20f884705
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/mac@0.1.1
+
+##### Package: python-http-client
+
+PackageName: python-http-client
+SPDXID: SPDXRef-Package-585712c18f6aea95
+PackageVersion: 3.1.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/python-http-client@3.1.0
+
+##### Package: amqp
+
+PackageName: amqp
+SPDXID: SPDXRef-Package-587008ebecd8c972
+PackageVersion: 2.4.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/amqp@2.4.2
+
+##### Package: django-timezone-field
+
+PackageName: django-timezone-field
+SPDXID: SPDXRef-Package-63b9cbc3e02afc58
+PackageVersion: 3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-timezone-field@3.0
+
+##### Package: markupsafe
+
+PackageName: markupsafe
+SPDXID: SPDXRef-Package-679bf5f459871155
+PackageVersion: 1.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/markupsafe@1.1.1
+
+##### Package: bitflags
+
+PackageName: bitflags
+SPDXID: SPDXRef-Package-67ade7b19502b326
+PackageVersion: 1.0.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/bitflags@1.0.4
+
+##### Package: tempdir
+
+PackageName: tempdir
+SPDXID: SPDXRef-Package-694fc3a5383d0cbe
+PackageVersion: 0.3.7
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/tempdir@0.3.7
+
+##### Package: s3transfer
+
+PackageName: s3transfer
+SPDXID: SPDXRef-Package-6bc9023ff9cb7e2
+PackageVersion: 0.2.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/s3transfer@0.2.0
+
+##### Package: psycopg2-binary
+
+PackageName: psycopg2-binary
+SPDXID: SPDXRef-Package-6f22aa9c90917d66
+PackageVersion: 2.8.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/psycopg2-binary@2.8.1
+
+##### Package: string_cache
+
+PackageName: string_cache
+SPDXID: SPDXRef-Package-6f67066836a47af7
+PackageVersion: 0.7.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/string_cache@0.7.3
+
+##### Package: retry
+
+PackageName: retry
+SPDXID: SPDXRef-Package-6ffbd71e986112eb
+PackageVersion: 0.9.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/retry@0.9.2
+
+##### Package: certifi
+
+PackageName: certifi
+SPDXID: SPDXRef-Package-708bc9a83c49650f
+PackageVersion: 2019.3.9
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/certifi@2019.3.9
+
+##### Package: kombu
+
+PackageName: kombu
+SPDXID: SPDXRef-Package-755a0e3e8668823f
+PackageVersion: 4.5.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/kombu@4.5.0
+
+##### Package: libc
+
+PackageName: libc
+SPDXID: SPDXRef-Package-7701190da419bfd3
+PackageVersion: 0.2.54
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/libc@0.2.54
+
+##### Package: rand_chacha
+
+PackageName: rand_chacha
+SPDXID: SPDXRef-Package-7a1d5bbae1707047
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_chacha@0.1.1
+
+##### Package: proc-macro2
+
+PackageName: proc-macro2
+SPDXID: SPDXRef-Package-7b49c9e4539a5c75
+PackageVersion: 0.4.30
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/proc-macro2@0.4.30
+
+##### Package: rand_core
+
+PackageName: rand_core
+SPDXID: SPDXRef-Package-7dcfcea9dd08dbaf
+PackageVersion: 0.3.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_core@0.3.1
+
+##### Package: syn
+
+PackageName: syn
+SPDXID: SPDXRef-Package-7fe46286c6990dc7
+PackageVersion: 0.15.34
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/syn@0.15.34
+
+##### Package: remove_dir_all
+
+PackageName: remove_dir_all
+SPDXID: SPDXRef-Package-8233d5b05075953e
+PackageVersion: 0.5.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/remove_dir_all@0.5.1
+
+##### Package: rand_os
+
+PackageName: rand_os
+SPDXID: SPDXRef-Package-85be31b27173e159
+PackageVersion: 0.1.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_os@0.1.3
+
+##### Package: serde_json
+
+PackageName: serde_json
+SPDXID: SPDXRef-Package-85cdc77dfe05661
+PackageVersion: 1.0.39
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/serde_json@1.0.39
+
+##### Package: phf_shared
+
+PackageName: phf_shared
+SPDXID: SPDXRef-Package-88ae31778e7ab8b9
+PackageVersion: 0.7.24
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/phf_shared@0.7.24
+
+##### Package: cloudabi
+
+PackageName: cloudabi
+SPDXID: SPDXRef-Package-8951efc4b082609a
+PackageVersion: 0.0.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/cloudabi@0.0.3
+
+##### Package: lazy_static
+
+PackageName: lazy_static
+SPDXID: SPDXRef-Package-89d3ce024ac07f15
+PackageVersion: 0.2.11
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/lazy_static@0.2.11
+
+##### Package: celery
+
+PackageName: celery
+SPDXID: SPDXRef-Package-8bd44d29ea1dffc
+PackageVersion: 4.3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/celery@4.3.0
+
+##### Package: boto3
+
+PackageName: boto3
+SPDXID: SPDXRef-Package-8c76b02b07c71f6d
+PackageVersion: 1.9.130
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/boto3@1.9.130
+
+##### Package: ammonia
+
+PackageName: ammonia
+SPDXID: SPDXRef-Package-8d1fb5f103f57b06
+PackageVersion: 1.9.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/ammonia@1.9.0
+
+##### Package: openssl-sys
+
+PackageName: openssl-sys
+SPDXID: SPDXRef-Package-9078a7f45e8d6e9e
+PackageVersion: 0.7.17
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/openssl-sys@0.7.17
+
+##### Package: winapi-x86_64-pc-windows-gnu
+
+PackageName: winapi-x86_64-pc-windows-gnu
+SPDXID: SPDXRef-Package-90e38f551febf1d4
+PackageVersion: 0.4.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/winapi-x86_64-pc-windows-gnu@0.4.0
+
+##### Package: quote
+
+PackageName: quote
+SPDXID: SPDXRef-Package-911661d7ea163ec1
+PackageVersion: 0.6.12
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/quote@0.6.12
+
+##### Package: cfg-if
+
+PackageName: cfg-if
+SPDXID: SPDXRef-Package-913507c45cc8c19a
+PackageVersion: 0.1.7
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/cfg-if@0.1.7
+
+##### Package: winapi-i686-pc-windows-gnu
+
+PackageName: winapi-i686-pc-windows-gnu
+SPDXID: SPDXRef-Package-92398f5bafa2c19a
+PackageVersion: 0.4.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/winapi-i686-pc-windows-gnu@0.4.0
+
+##### Package: siphasher
+
+PackageName: siphasher
+SPDXID: SPDXRef-Package-93da1eac7a189694
+PackageVersion: 0.2.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/siphasher@0.2.3
+
+##### Package: rand_pcg
+
+PackageName: rand_pcg
+SPDXID: SPDXRef-Package-99a4dc42f5a5973b
+PackageVersion: 0.1.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_pcg@0.1.2
+
+##### Package: rand
+
+PackageName: rand
+SPDXID: SPDXRef-Package-9c8f414b07094835
+PackageVersion: 0.6.5
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand@0.6.5
+
+##### Package: httplib2
+
+PackageName: httplib2
+SPDXID: SPDXRef-Package-9f02dadb5e201f18
+PackageVersion: 0.12.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/httplib2@0.12.1
+
+##### Package: pygments
+
+PackageName: pygments
+SPDXID: SPDXRef-Package-a04a345c3e356654
+PackageVersion: 2.3.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pygments@2.3.1
+
+##### Package: phf
+
+PackageName: phf
+SPDXID: SPDXRef-Package-a1ff4ba8e1ba8519
+PackageVersion: 0.7.24
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/phf@0.7.24
+
+##### Package: djangorestframework
+
+PackageName: djangorestframework
+SPDXID: SPDXRef-Package-a2ac514ab237e3a6
+PackageVersion: 3.9.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/djangorestframework@3.9.2
+
+##### Package: percent-encoding
+
+PackageName: percent-encoding
+SPDXID: SPDXRef-Package-a2eee205289c9a05
+PackageVersion: 1.0.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/percent-encoding@1.0.1
+
+##### Package: decorator
+
+PackageName: decorator
+SPDXID: SPDXRef-Package-a302e2167b24c54d
+PackageVersion: 4.4.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/decorator@4.4.0
+
+##### Package: pkg-config
+
+PackageName: pkg-config
+SPDXID: SPDXRef-Package-a572f4ff46e76464
+PackageVersion: 0.3.14
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/pkg-config@0.3.14
+
+##### Package: six
+
+PackageName: six
+SPDXID: SPDXRef-Package-a5f7dfb182cf4686
+PackageVersion: 1.12.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/six@1.12.0
+
+##### Package: gunicorn
+
+PackageName: gunicorn
+SPDXID: SPDXRef-Package-a68eb2e2d994d952
+PackageVersion: 19.9.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/gunicorn@19.9.0
+
+##### Package: lazy_static
+
+PackageName: lazy_static
+SPDXID: SPDXRef-Package-a80a6eb02e7ce24
+PackageVersion: 1.3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/lazy_static@1.3.0
+
+##### Package: idna
+
+PackageName: idna
+SPDXID: SPDXRef-Package-a8540f2406f34d85
+PackageVersion: 2.8
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/idna@2.8
+
+##### Package: smallvec
+
+PackageName: smallvec
+SPDXID: SPDXRef-Package-a94bd343baa970a6
+PackageVersion: 0.6.9
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/smallvec@0.6.9
+
+##### Package: maplit
+
+PackageName: maplit
+SPDXID: SPDXRef-Package-ad6b4df462e60e82
+PackageVersion: 1.0.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/maplit@1.0.1
+
+##### Package: serde
+
+PackageName: serde
+SPDXID: SPDXRef-Package-aef58821825d725e
+PackageVersion: 1.0.91
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/serde@1.0.91
+
+##### Package: py
+
+PackageName: py
+SPDXID: SPDXRef-Package-b30ccb8980517b47
+PackageVersion: 1.8.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/py@1.8.0
+
+##### Package: bitflags
+
+PackageName: bitflags
+SPDXID: SPDXRef-Package-b34f4789775bf6d8
+PackageVersion: 0.7.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/bitflags@0.7.0
+
+##### Package: libressl-pnacl-sys
+
+PackageName: libressl-pnacl-sys
+SPDXID: SPDXRef-Package-b692486174ea469d
+PackageVersion: 2.1.6
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/libressl-pnacl-sys@2.1.6
+
+##### Package: unicode-bidi
+
+PackageName: unicode-bidi
+SPDXID: SPDXRef-Package-b78720618d4e39a0
+PackageVersion: 0.3.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/unicode-bidi@0.3.4
+
+##### Package: rand_jitter
+
+PackageName: rand_jitter
+SPDXID: SPDXRef-Package-b7ab6fe8f8d66e04
+PackageVersion: 0.1.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_jitter@0.1.4
+
+##### Package: django-cors-headers
+
+PackageName: django-cors-headers
+SPDXID: SPDXRef-Package-b983079856e8185f
+PackageVersion: 2.5.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-cors-headers@2.5.2
+
+##### Package: matches
+
+PackageName: matches
+SPDXID: SPDXRef-Package-ba40270a72d9c98e
+PackageVersion: 0.1.8
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/matches@0.1.8
+
+##### Package: pyyaml
+
+PackageName: pyyaml
+SPDXID: SPDXRef-Package-be2f1eaa674ac1df
+PackageVersion: 5.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pyyaml@5.1
+
+##### Package: python-dateutil
+
+PackageName: python-dateutil
+SPDXID: SPDXRef-Package-bf506682d51091e5
+PackageVersion: 2.8.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/python-dateutil@2.8.0
+
+##### Package: precomputed-hash
+
+PackageName: precomputed-hash
+SPDXID: SPDXRef-Package-c324c0cf05c88d9d
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/precomputed-hash@0.1.1
+
+##### Package: autopep8
+
+PackageName: autopep8
+SPDXID: SPDXRef-Package-c6e842da2530699f
+PackageVersion: 1.4.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/autopep8@1.4.3
+
+##### Package: openssl
+
+PackageName: openssl
+SPDXID: SPDXRef-Package-c7901d96c2e805ab
+PackageVersion: 0.8.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/openssl@0.8.3
+
+##### Package: billiard
+
+PackageName: billiard
+SPDXID: SPDXRef-Package-c952efc73c12b7f0
+PackageVersion: 3.6.0.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/billiard@3.6.0.0
+
+##### Package: markup5ever
+
+PackageName: markup5ever
+SPDXID: SPDXRef-Package-ca973c8d83108ab5
+PackageVersion: 0.8.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/markup5ever@0.8.1
+
+##### Package: same-file
+
+PackageName: same-file
+SPDXID: SPDXRef-Package-cd8cff579aebcd87
+PackageVersion: 0.1.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/same-file@0.1.3
+
+##### Package: tendril
+
+PackageName: tendril
+SPDXID: SPDXRef-Package-ce09059a98980e07
+PackageVersion: 0.4.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/tendril@0.4.1
+
+##### Package: xmltodict
+
+PackageName: xmltodict
+SPDXID: SPDXRef-Package-ce4f4689d19280ae
+PackageVersion: 0.12.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/xmltodict@0.12.0
+
+##### Package: sqlparse
+
+PackageName: sqlparse
+SPDXID: SPDXRef-Package-d1cc7e7b68696b9e
+PackageVersion: 0.3.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/sqlparse@0.3.0
+
+##### Package: django-postgres-extra
+
+PackageName: django-postgres-extra
+SPDXID: SPDXRef-Package-d3063aa14fdbe309
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-postgres-extra
+
+##### Package: pnacl-build-helper
+
+PackageName: pnacl-build-helper
+SPDXID: SPDXRef-Package-d4893f9c4a688edd
+PackageVersion: 1.4.11
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/pnacl-build-helper@1.4.11
+
+##### Package: babel
+
+PackageName: babel
+SPDXID: SPDXRef-Package-d594a80a5e2fa7a3
+PackageVersion: 2.6.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/babel@2.6.0
+
+##### Package: jinja2
+
+PackageName: jinja2
+SPDXID: SPDXRef-Package-d5cf936d50926ce8
+PackageVersion: 2.10.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/jinja2@2.10.1
+
+##### Package: winapi
+
+PackageName: winapi
+SPDXID: SPDXRef-Package-d77f4cc37548b5eb
+PackageVersion: 0.2.8
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/winapi@0.2.8
+
+##### Package: fuchsia-cprng
+
+PackageName: fuchsia-cprng
+SPDXID: SPDXRef-Package-d7dd314a25465966
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/fuchsia-cprng@0.1.1
+
+##### Package: url
+
+PackageName: url
+SPDXID: SPDXRef-Package-d9bf902e57aa4e2
+PackageVersion: 1.7.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/url@1.7.2
+
+##### Package: new_debug_unreachable
+
+PackageName: new_debug_unreachable
+SPDXID: SPDXRef-Package-db1fec76fb7a305b
+PackageVersion: 1.0.3
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/new_debug_unreachable@1.0.3
+
+##### Package: futf
+
+PackageName: futf
+SPDXID: SPDXRef-Package-e0833589b2a3ad58
+PackageVersion: 0.1.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/futf@0.1.4
+
+##### Package: kernel32-sys
+
+PackageName: kernel32-sys
+SPDXID: SPDXRef-Package-e31e84d057a3d653
+PackageVersion: 0.2.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/kernel32-sys@0.2.2
+
+##### Package: rand_isaac
+
+PackageName: rand_isaac
+SPDXID: SPDXRef-Package-e32467963e68d167
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_isaac@0.1.1
+
+##### Package: autocfg
+
+PackageName: autocfg
+SPDXID: SPDXRef-Package-e61f94ffd7114d83
+PackageVersion: 0.1.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/autocfg@0.1.2
+
+##### Package: pycurl
+
+PackageName: pycurl
+SPDXID: SPDXRef-Package-e7b20ecb2a27eae6
+PackageVersion: 7.43.0.2
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pycurl@7.43.0.2
+
+##### Package: urllib3
+
+PackageName: urllib3
+SPDXID: SPDXRef-Package-e7b6f9fea270d1fe
+PackageVersion: 1.24.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/urllib3@1.24.1
+
+##### Package: winapi-build
+
+PackageName: winapi-build
+SPDXID: SPDXRef-Package-e9505afabc549f4f
+PackageVersion: 0.1.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/winapi-build@0.1.1
+
+##### Package: gdi32-sys
+
+PackageName: gdi32-sys
+SPDXID: SPDXRef-Package-e9d0b3b08f38c763
+PackageVersion: 0.2.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/gdi32-sys@0.2.0
+
+##### Package: requests
+
+PackageName: requests
+SPDXID: SPDXRef-Package-ec5ec7b2903b54a6
+PackageVersion: 2.21.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/requests@2.21.0
+
+##### Package: sentry-sdk
+
+PackageName: sentry-sdk
+SPDXID: SPDXRef-Package-f00c974f366c8673
+PackageVersion: 0.7.10
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/sentry-sdk@0.7.10
+
+##### Package: phf_generator
+
+PackageName: phf_generator
+SPDXID: SPDXRef-Package-f4648a645c9856c
+PackageVersion: 0.7.24
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/phf_generator@0.7.24
+
+##### Package: rand_hc
+
+PackageName: rand_hc
+SPDXID: SPDXRef-Package-f479667615aebe56
+PackageVersion: 0.1.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rand_hc@0.1.0
+
+##### Package: pycodestyle
+
+PackageName: pycodestyle
+SPDXID: SPDXRef-Package-f64b47d641a60315
+PackageVersion: 2.5.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/pycodestyle@2.5.0
+
+##### Package: rdrand
+
+PackageName: rdrand
+SPDXID: SPDXRef-Package-f6b3cfaf825fd5ba
+PackageVersion: 0.4.0
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/rdrand@0.4.0
+
+##### Package: sendgrid
+
+PackageName: sendgrid
+SPDXID: SPDXRef-Package-facf0f21efaaf84d
+PackageVersion: 6.0.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/sendgrid@6.0.4
+
+##### Package: django-silk
+
+PackageName: django-silk
+SPDXID: SPDXRef-Package-fae22fc2e1c49e39
+PackageVersion: 3.0.1
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/django-silk@3.0.1
+
+##### Package: unicode-normalization
+
+PackageName: unicode-normalization
+SPDXID: SPDXRef-Package-fdb2e3a6c152cff2
+PackageVersion: 0.1.8
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:cargo/unicode-normalization@0.1.8
+
+##### Package: docutils
+
+PackageName: docutils
+SPDXID: SPDXRef-Package-fe65e0afdc63cec2
+PackageVersion: 0.14
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/docutils@0.14
+
+##### Package: chardet
+
+PackageName: chardet
+SPDXID: SPDXRef-Package-ff5b9830e5505e85
+PackageVersion: 3.0.4
+FilesAnalyzed: false
+PackageLicenseConcluded: NONE
+PackageLicenseDeclared: NONE
+ExternalRef: PACKAGE-MANAGER purl pkg:pypi/chardet@3.0.4
+
+##### Package: https://github.com/knqyf263/trivy-ci-test
+
+PackageName: https://github.com/knqyf263/trivy-ci-test
+SPDXID: SPDXRef-Repository-a456fa3fa6e9877d
+FilesAnalyzed: false
+PackageAttributionText: SchemaVersion: 2
+
+##### Relationships
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-Repository-a456fa3fa6e9877d
+Relationship: SPDXRef-Repository-a456fa3fa6e9877d CONTAINS SPDXRef-Application-226d03fb18dfe129
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-8d1fb5f103f57b06
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-e61f94ffd7114d83
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-b34f4789775bf6d8
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-67ade7b19502b326
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-913507c45cc8c19a
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-8951efc4b082609a
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-d7dd314a25465966
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-e0833589b2a3ad58
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-e9d0b3b08f38c763
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-3488ac47ef25761d
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-20804fe1191d5b54
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-3b5b80599260b50a
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-e31e84d057a3d653
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-89d3ce024ac07f15
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-a80a6eb02e7ce24
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-7701190da419bfd3
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-b692486174ea469d
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-531dac4ae8358110
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-5658b1c20f884705
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-ad6b4df462e60e82
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-ca973c8d83108ab5
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-ba40270a72d9c98e
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-db1fec76fb7a305b
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-128079c0951a99f8
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-c7901d96c2e805ab
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-9078a7f45e8d6e9e
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-a2eee205289c9a05
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-a1ff4ba8e1ba8519
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-37b7e07d52e43928
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-f4648a645c9856c
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-88ae31778e7ab8b9
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-a572f4ff46e76464
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-d4893f9c4a688edd
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-c324c0cf05c88d9d
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-7b49c9e4539a5c75
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-911661d7ea163ec1
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-36e910b313f474d3
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-9c8f414b07094835
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-7a1d5bbae1707047
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-7dcfcea9dd08dbaf
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-538130b9e67663bb
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-f479667615aebe56
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-e32467963e68d167
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-b7ab6fe8f8d66e04
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-85be31b27173e159
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-99a4dc42f5a5973b
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-169150f76064cfc1
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-f6b3cfaf825fd5ba
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-8233d5b05075953e
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-53288fc25e8380ea
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-cd8cff579aebcd87
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-aef58821825d725e
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-3d9ccdbca52614d3
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-85cdc77dfe05661
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-93da1eac7a189694
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-a94bd343baa970a6
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-6f67066836a47af7
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-485e0b2473a215f6
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-141b5a22d97a55bf
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-7fe46286c6990dc7
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-694fc3a5383d0cbe
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-ce09059a98980e07
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-b78720618d4e39a0
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-fdb2e3a6c152cff2
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-3721d8e465fcaec9
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-d9bf902e57aa4e2
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-514023c4fe9b55d1
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-31499d72668be4d4
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-4bb384d3fa15beaa
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-d77f4cc37548b5eb
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-3a60bfeca7c3d4f6
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-e9505afabc549f4f
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-92398f5bafa2c19a
+Relationship: SPDXRef-Application-226d03fb18dfe129 CONTAINS SPDXRef-Package-90e38f551febf1d4
+Relationship: SPDXRef-Repository-a456fa3fa6e9877d CONTAINS SPDXRef-Application-a7d170ab39c108ae
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-587008ebecd8c972
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-c6e842da2530699f
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-d594a80a5e2fa7a3
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-c952efc73c12b7f0
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-8c76b02b07c71f6d
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-4367aef58bd19cf3
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-8bd44d29ea1dffc
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-708bc9a83c49650f
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-ff5b9830e5505e85
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-a302e2167b24c54d
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1f4c40e5cb41fefe
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-55eba067914c4b28
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-b983079856e8185f
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-2df229366d17505b
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-d3063aa14fdbe309
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-3f0ad943854be2d0
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-fae22fc2e1c49e39
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-63b9cbc3e02afc58
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-a2ac514ab237e3a6
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1e524f52c5d18946
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-fe65e0afdc63cec2
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-44a58ba9540e69f9
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1915fe3b72a0edc6
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-a68eb2e2d994d952
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-560ce77f2890a37d
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-9f02dadb5e201f18
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-a8540f2406f34d85
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-d5cf936d50926ce8
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-2662f4498c2ab359
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-755a0e3e8668823f
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-679bf5f459871155
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-39f0d148ef8f46d7
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-6f22aa9c90917d66
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-b30ccb8980517b47
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-f64b47d641a60315
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-e7b20ecb2a27eae6
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-a04a345c3e356654
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1fa8bdd53d20113c
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1b7142ac6921224
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-bf506682d51091e5
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-585712c18f6aea95
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1f81a1a3a7916995
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-be2f1eaa674ac1df
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-3240d2de640a47e
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-ec5ec7b2903b54a6
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-6ffbd71e986112eb
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-6bc9023ff9cb7e2
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-facf0f21efaaf84d
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-f00c974f366c8673
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-a5f7dfb182cf4686
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-d1cc7e7b68696b9e
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-1dc9be568cf7f2e9
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-e7b6f9fea270d1fe
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-55d9648375680e39
+Relationship: SPDXRef-Application-a7d170ab39c108ae CONTAINS SPDXRef-Package-ce4f4689d19280ae
+

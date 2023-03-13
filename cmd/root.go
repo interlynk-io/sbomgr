@@ -23,8 +23,12 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "sbomgr",
-	Short: "A brief description of your application",
-	Long:  ``,
+	Short: "a modern tool to search sboms",
+	Long: `
+sbomgr is a modern tool to search sboms. It is designed to be fast 
+and easy to use. It is a command line tool that can be used to search
+sboms for packages and files. 
+	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -40,16 +44,36 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
+	//Pattern
+	rootCmd.PersistentFlags().BoolP("extended-regexp", "E", false, "intrepret filters as regular expressions, https://github.com/google/re2/wiki/Syntax")
+	rootCmd.PersistentFlags().BoolP("fixed-strings", "F", true, "interpret filters as fixed strings, default")
+	rootCmd.MarkFlagsMutuallyExclusive("extended-regexp", "fixed-strings")
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.sbomgr.yaml)")
+	//Matching Control
+	rootCmd.PersistentFlags().BoolP("ignore-case", "i", false, "ignore case distinctions in filters, lowers the package/file criterias")
+	rootCmd.PersistentFlags().BoolP("invert-match", "v", false, "packages or files that dont match")
+	rootCmd.PersistentFlags().BoolP("direct-deps", "d", false, "search direct dependencies only, default is to search all packages/files")
 
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.PersistentFlags().BoolP("direct", "d", false, "search direct dependencies only")
-	rootCmd.PersistentFlags().BoolP("licenses", "l", false, "output with licenses")
-	rootCmd.PersistentFlags().BoolP("stats", "s", false, "output with stats")
+	//Output Control
+	rootCmd.PersistentFlags().BoolP("license", "l", false, "output with licenses")
+	rootCmd.PersistentFlags().BoolP("quiet", "q", false, "suppress normal output, exits with 0 if match found")
+	rootCmd.PersistentFlags().BoolP("no-filename", "", false, "output with no filename")
+	rootCmd.PersistentFlags().BoolP("jsonl", "j", false, "results in json-lines format https://jsonlines.org/")
+	rootCmd.PersistentFlags().BoolP("print-errors", "p", false, "include errors in output")
 
+	//stats Control
+	rootCmd.PersistentFlags().BoolP("count", "c", false, "suppress normal output, print count of matching packages/files")
+	rootCmd.PersistentFlags().BoolP("stats", "s", false, "suppress normal output, print stats of matching packages/files")
+	rootCmd.MarkFlagsMutuallyExclusive("count", "stats")
+
+	//Directory Control
+	rootCmd.PersistentFlags().BoolP("recurse", "r", false, "recurse into subdirectories")
+
+	//Spec Control
+	rootCmd.PersistentFlags().BoolP("spdx", "", false, "limit searches to spdx sboms")
+	rootCmd.PersistentFlags().BoolP("cdx", "", false, "limit searches to cdx sboms")
+	rootCmd.MarkFlagsMutuallyExclusive("spdx", "cdx")
+
+	//Resource Control
+	rootCmd.PersistentFlags().IntP("cpus", "", 0, "restrict number of cpus, default is all")
 }

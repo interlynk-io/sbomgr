@@ -16,13 +16,15 @@ package reporter
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 
-	"github.com/interlynk-io/sbomgr/pkg/search"
+	"github.com/interlynk-io/sbomgr/pkg/search/results"
 )
 
 type Report struct {
-	Ctx     context.Context
-	Results *search.SearchResults
+	Ctx    context.Context
+	Result *results.Result
 
 	//optionals
 	Direct   bool
@@ -50,10 +52,9 @@ func WithLicenses(licenses bool) Option {
 	}
 }
 
-func NewReport(ctx context.Context, results *search.SearchResults, opts ...Option) *Report {
+func NewReport(ctx context.Context, opts ...Option) *Report {
 	r := &Report{
-		Ctx:     ctx,
-		Results: results,
+		Ctx: ctx,
 	}
 
 	for _, opt := range opts {
@@ -63,6 +64,11 @@ func NewReport(ctx context.Context, results *search.SearchResults, opts ...Optio
 	return r
 }
 
-func (r *Report) Report() error {
-	return nil
+func (r *Report) SetResult(result *results.Result) {
+	r.Result = result
+}
+
+func (r *Report) Report() {
+	b, _ := json.Marshal(r.Result)
+	fmt.Println(string(b))
 }
