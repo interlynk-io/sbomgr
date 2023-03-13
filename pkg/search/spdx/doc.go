@@ -21,6 +21,7 @@ import (
 	"strings"
 
 	"github.com/interlynk-io/sbomgr/pkg/detect"
+	"github.com/interlynk-io/sbomgr/pkg/search/options"
 	spdx_json "github.com/spdx/tools-golang/json"
 	spdx_rdf "github.com/spdx/tools-golang/rdfloader"
 	spdx_common "github.com/spdx/tools-golang/spdx/common"
@@ -30,26 +31,28 @@ import (
 )
 
 type spdxDoc struct {
-	doc *v2_3.Document
+	doc  *v2_3.Document
+	ro   *options.RuntimeOptions
+	opts options.SearchOptions
 }
 
-func loadDoc(s *SpdxModule) (*spdxDoc, error) {
-	s.ro.File.Seek(0, io.SeekStart)
+func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*spdxDoc, error) {
+	ro.File.Seek(0, io.SeekStart)
 
 	var d *v2_3.Document
 	var err error
 
-	switch s.ro.SbomFileFormat {
+	switch ro.SbomFileFormat {
 	case detect.FileFormatJSON:
-		d, err = spdx_json.Load2_3(s.ro.File)
+		d, err = spdx_json.Load2_3(ro.File)
 	case detect.FileFormatTagValue:
-		d, err = spdx_tv.Load2_3(s.ro.File)
+		d, err = spdx_tv.Load2_3(ro.File)
 	case detect.FileFormatYAML:
-		d, err = spdx_yaml.Load2_3(s.ro.File)
+		d, err = spdx_yaml.Load2_3(ro.File)
 	case detect.FileFormatRDF:
-		d, err = spdx_rdf.Load2_3(s.ro.File)
+		d, err = spdx_rdf.Load2_3(ro.File)
 	default:
-		err = fmt.Errorf("unsupported spdx format %s", string(s.ro.SbomFileFormat))
+		err = fmt.Errorf("unsupported spdx format %s", string(ro.SbomFileFormat))
 	}
 
 	if err != nil {
@@ -57,21 +60,23 @@ func loadDoc(s *SpdxModule) (*spdxDoc, error) {
 	}
 
 	doc := &spdxDoc{
-		doc: d,
+		doc:  d,
+		ro:   ro,
+		opts: opts,
 	}
 
 	return doc, nil
 }
 
-func (d *spdxDoc) searchPackages(sm *SpdxModule) []int {
-	if sm.so.SearchName() != "" {
-		return d.matchEngine(sm, sm.so.SearchName(), func(pkg *v2_3.Package) []string {
+func (d *spdxDoc) searchPackages() []int {
+	if d.opts.SearchName() != "" {
+		return d.matchEngine(d.opts.SearchName(), func(pkg *v2_3.Package) []string {
 			return []string{pkg.PackageName}
 		})
 	}
 
-	if sm.so.SearchCPE() != "" {
-		return d.matchEngine(sm, sm.so.SearchCPE(), func(pkg *v2_3.Package) []string {
+	if d.opts.SearchCPE() != "" {
+		return d.matchEngine(d.opts.SearchCPE(), func(pkg *v2_3.Package) []string {
 			if len(pkg.PackageExternalReferences) == 0 {
 				return []string{}
 			}
@@ -86,8 +91,8 @@ func (d *spdxDoc) searchPackages(sm *SpdxModule) []int {
 		})
 	}
 
-	if sm.so.SearchPURL() != "" {
-		return d.matchEngine(sm, sm.so.SearchPURL(), func(pkg *v2_3.Package) []string {
+	if d.opts.SearchPURL() != "" {
+		return d.matchEngine(d.opts.SearchPURL(), func(pkg *v2_3.Package) []string {
 			if len(pkg.PackageExternalReferences) == 0 {
 				return []string{}
 			}
@@ -101,8 +106,8 @@ func (d *spdxDoc) searchPackages(sm *SpdxModule) []int {
 		})
 	}
 
-	if sm.so.SearchHash() != "" {
-		return d.matchEngine(sm, sm.so.SearchHash(), func(pkg *v2_3.Package) []string {
+	if d.opts.SearchHash() != "" {
+		return d.matchEngine(d.opts.SearchHash(), func(pkg *v2_3.Package) []string {
 			if len(pkg.PackageChecksums) == 0 {
 				return []string{}
 			}
@@ -121,12 +126,12 @@ func (d *spdxDoc) searchPackages(sm *SpdxModule) []int {
 	return allPkgs
 }
 
-func (d *spdxDoc) matchEngine(sm *SpdxModule, matchCriteria string, mfunc func(*v2_3.Package) []string) []int {
+func (d *spdxDoc) matchEngine(matchCriteria string, mfunc func(*v2_3.Package) []string) []int {
 	var regE *regexp.Regexp
 
 	pkgIdx := []int{}
 
-	if sm.so.IsRegularExp() {
+	if d.opts.IsRegularExp() {
 		regE = regexp.MustCompile(matchCriteria)
 	}
 
@@ -136,8 +141,8 @@ func (d *spdxDoc) matchEngine(sm *SpdxModule, matchCriteria string, mfunc func(*
 			continue
 		}
 		for _, s := range mSubject {
-			if sm.so.IsRegularExp() {
-				if sm.so.DoIgnoreCase() {
+			if d.opts.IsRegularExp() {
+				if d.opts.DoIgnoreCase() {
 					if regE.MatchString(strings.ToLower(s)) {
 						pkgIdx = append(pkgIdx, i)
 					}
@@ -147,7 +152,7 @@ func (d *spdxDoc) matchEngine(sm *SpdxModule, matchCriteria string, mfunc func(*
 					}
 				}
 			} else {
-				if sm.so.DoIgnoreCase() {
+				if d.opts.DoIgnoreCase() {
 					if strings.EqualFold(s, matchCriteria) {
 						pkgIdx = append(pkgIdx, i)
 					}

@@ -23,27 +23,27 @@ import (
 	spdx_common "github.com/spdx/tools-golang/spdx/common"
 )
 
-func (s *spdxDoc) constructResults(sm *SpdxModule, pIndices []int) (*results.Result, error) {
-	if sm.so.BeQuiet() {
+func (s *spdxDoc) constructResults(pIndices []int) (*results.Result, error) {
+	if s.opts.BeQuiet() {
 		return &results.Result{
-			Path:    sm.ro.CurrentPath,
+			Path:    s.ro.CurrentPath,
 			Matched: len(pIndices) > 0,
 		}, nil
 	}
 
 	return &results.Result{
-		Path:           sm.ro.CurrentPath,
-		Format:         string(sm.ro.SbomFileFormat),
-		Spec:           string(sm.ro.SbomSpecType),
+		Path:           s.ro.CurrentPath,
+		Format:         string(s.ro.SbomFileFormat),
+		Spec:           string(s.ro.SbomSpecType),
 		ProductName:    s.docName(),
 		ProductVersion: "",
-		Packages:       s.pkgResults(sm, pIndices),
+		Packages:       s.pkgResults(pIndices),
 		Files:          []results.File{},
 		Matched:        len(pIndices) > 0,
 	}, nil
 }
 
-func (s *spdxDoc) pkgResults(sm *SpdxModule, indices []int) []results.Package {
+func (s *spdxDoc) pkgResults(indices []int) []results.Package {
 	pkgs := make([]results.Package, len(indices))
 	for i, idx := range indices {
 		pkgs[i] = results.Package{
@@ -51,8 +51,15 @@ func (s *spdxDoc) pkgResults(sm *SpdxModule, indices []int) []results.Package {
 			Version: s.doc.Packages[idx].PackageVersion,
 			PURL:    s.Purl(idx),
 		}
-		if sm.so.DoLicense() {
-			pkgs[i].License = s.licenses(idx)
+		if s.opts.DoLicense() {
+			ls := s.licenses(idx)
+			for _, lic := range ls {
+				pkgs[i].Licenses = append(pkgs[i].Licenses, licenses.LicenseStore{
+					Nm: lic.Name(),
+					Ss: lic.ShortID(),
+					Ds: lic.Deprecated(),
+				})
+			}
 		}
 	}
 	return pkgs
@@ -118,24 +125,25 @@ func (s *spdxDoc) licenses(index int) []licenses.License {
 	}
 
 	present, otherLic = checkOtherLics(pkg.PackageLicenseConcluded)
+
 	if present {
 		addLicense(&lics, licenses.NewLicenseFromID(otherLic))
 	} else {
 		addLicense(&lics, licenses.NewLicenseFromID(pkg.PackageLicenseConcluded))
 	}
 
-	removeDups := func(lics []licenses.License) []licenses.License {
+	removeDups := func(ll []licenses.License) []licenses.License {
 		uniqs := []licenses.License{}
 		dedup := map[string]bool{}
-		for _, l := range lics {
+		for _, l := range ll {
 			if _, ok := dedup[l.ShortID()]; !ok {
 				uniqs = append(uniqs, l)
 				dedup[l.ShortID()] = true
 			}
 		}
 		return uniqs
-
 	}
+
 	return removeDups(lics)
 }
 

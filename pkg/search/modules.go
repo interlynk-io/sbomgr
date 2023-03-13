@@ -25,9 +25,7 @@ import (
 )
 
 type SearchModules interface {
-	Search() (*results.Result, error)
-	SetRuntimeOptions(*options.RuntimeOptions)
-	SetSearchOptions(options.SearchOptions)
+	Search(*options.RuntimeOptions, options.SearchOptions) (*results.Result, error)
 }
 
 var search_mods = map[detect.SBOMSpecFormat]SearchModules{}

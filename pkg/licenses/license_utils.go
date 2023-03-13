@@ -5,26 +5,26 @@ import (
 	"strings"
 )
 
-type license struct {
-	name       string
-	short      string
-	deprecated bool
+type LicenseStore struct {
+	Nm string `json:"name,omitempty"`
+	Ss string `json:"short,omitempty"`
+	Ds bool   `json:"deprecated,omitempty"`
 }
 
-func (l license) Short() string {
-	return l.short
+func (l LicenseStore) Short() string {
+	return l.Ss
 }
 
-func (l license) Name() string {
-	return l.name
+func (l LicenseStore) Name() string {
+	return l.Nm
 }
 
-func (l license) Deprecated() bool {
-	return l.deprecated
+func (l LicenseStore) Deprecated() bool {
+	return l.Ds
 }
 
-func (l license) ValidSpdxLicense() bool {
-	return l.name != ""
+func (l LicenseStore) ValidSpdxLicense() bool {
+	return l.Nm != ""
 
 }
 func NewLicenseFromID(lic string) []License {

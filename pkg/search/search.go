@@ -63,11 +63,7 @@ func searchFunc(path string, o options.SearchOptions) *results.Result {
 	ro.SbomFileFormat = fileFormat
 	ro.File = f
 
-	sm := search_mods[sbomSpecFormat]
-	sm.SetRuntimeOptions(ro)
-	sm.SetSearchOptions(o)
-
-	sr, err := sm.Search()
+	sr, err := search_mods[sbomSpecFormat].Search(ro, o)
 	if err != nil {
 		return &results.Result{
 			Path:  path,

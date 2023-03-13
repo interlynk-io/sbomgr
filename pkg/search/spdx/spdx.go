@@ -19,24 +19,13 @@ import (
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
 )
 
-type SpdxModule struct {
-	ro *options.RuntimeOptions
-	so options.SearchOptions
-}
+type SpdxModule struct{}
 
-func (s *SpdxModule) SetRuntimeOptions(ro *options.RuntimeOptions) {
-	s.ro = ro
-}
-
-func (s *SpdxModule) SetSearchOptions(so options.SearchOptions) {
-	s.so = so
-}
-
-func (s *SpdxModule) Search() (*results.Result, error) {
-	doc, err := loadDoc(s)
+func (s *SpdxModule) Search(ro *options.RuntimeOptions, opts options.SearchOptions) (*results.Result, error) {
+	doc, err := loadDoc(ro, opts)
 	if err != nil {
 		return nil, err
 	}
-	pkgIdx := doc.searchPackages(s)
-	return doc.constructResults(s, pkgIdx)
+	pkgIdx := doc.searchPackages()
+	return doc.constructResults(pkgIdx)
 }
