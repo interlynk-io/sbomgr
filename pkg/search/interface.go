@@ -21,10 +21,12 @@ func Search(s *SearchParams) error {
 
 	if s.DoJson() {
 		ps.outputFunc = outputJsonl
-	} else if s.BeQuiet() {
-		ps.outputFunc = outputQuiet
 	} else {
 		ps.outputFunc = outputBasic
+	}
+
+	if s.BeQuiet() {
+		ps.outputFunc = outputQuiet
 	}
 
 	if s.DoRecurse() {
@@ -35,20 +37,5 @@ func Search(s *SearchParams) error {
 
 	errs := runPipeline(ps)
 
-	if ps.sParams.BeQuiet() {
-		//In quiet mode, if we find even a single match, we return success
-		for _, err := range errs {
-			if err == nil {
-				return nil
-			}
-		}
-	}
-
-	for _, err := range errs {
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
+	return handleFinalOutput(s, errs)
 }

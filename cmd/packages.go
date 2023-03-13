@@ -57,10 +57,11 @@ type UserCmd struct {
 
 // packagesCmd represents the packages command
 var packagesCmd = &cobra.Command{
-	Use:   "packages",
-	Short: "search over packages in sboms",
-	Long:  ``,
-	Args:  cobra.ExactArgs(1),
+	Use:          "packages",
+	Short:        "search over packages in sboms",
+	Long:         ``,
+	Args:         cobra.ExactArgs(1),
+	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, stop := logger.WithLoggerAndCancel(context.Background())
 		defer stop()
