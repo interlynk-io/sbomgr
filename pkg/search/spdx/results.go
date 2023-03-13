@@ -18,7 +18,6 @@ import (
 	"strings"
 
 	"github.com/interlynk-io/sbomgr/pkg/licenses"
-	"github.com/interlynk-io/sbomgr/pkg/search/options"
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
 
 	spdx_common "github.com/spdx/tools-golang/spdx/common"
@@ -31,47 +30,32 @@ func (s *spdxDoc) constructResults(sm *SpdxModule, pIndices []int) (*results.Res
 			Matched: len(pIndices) > 0,
 		}, nil
 	}
-	return nil, nil
-}
 
-func (s *spdxDoc) docResults(ro *options.RuntimeOptions, opts options.SearchOptions, pIndices []int, _ []int) *results.Result {
 	return &results.Result{
-		Path:           ro.CurrentPath,
-		Format:         string(ro.SbomFileFormat),
-		Spec:           string(ro.SbomSpecType),
+		Path:           sm.ro.CurrentPath,
+		Format:         string(sm.ro.SbomFileFormat),
+		Spec:           string(sm.ro.SbomSpecType),
 		ProductName:    s.docName(),
 		ProductVersion: "",
-		Packages:       s.pkgResults(pIndices),
+		Packages:       s.pkgResults(sm, pIndices),
 		Files:          []results.File{},
-	}
+		Matched:        len(pIndices) > 0,
+	}, nil
 }
 
-func (s *spdxDoc) pkgResults(indices []int) []results.Package {
+func (s *spdxDoc) pkgResults(sm *SpdxModule, indices []int) []results.Package {
 	pkgs := make([]results.Package, len(indices))
 	for i, idx := range indices {
 		pkgs[i] = results.Package{
-			Name:       s.doc.Packages[idx].PackageName,
-			Version:    s.doc.Packages[idx].PackageVersion,
-			PURL:       s.Purl(idx),
-			CPE:        s.CPEs(idx),
-			Direct:     s.directDep(idx),
-			PathToRoot: s.pathToRoot(idx),
-			License:    s.licenses(idx),
+			Name:    s.doc.Packages[idx].PackageName,
+			Version: s.doc.Packages[idx].PackageVersion,
+			PURL:    s.Purl(idx),
+		}
+		if sm.so.DoLicense() {
+			pkgs[i].License = s.licenses(idx)
 		}
 	}
 	return pkgs
-}
-
-func (s *spdxDoc) pathToRoot(index int) []string {
-	//_ := s.doc.Packages[index]
-
-	return []string{}
-}
-
-func (s *spdxDoc) directDep(index int) bool {
-	//_ := s.doc.Packages[index]
-
-	return false
 }
 
 func (s *spdxDoc) CPEs(index int) []string {
@@ -103,7 +87,6 @@ func (s *spdxDoc) Purl(index int) string {
 			return p.Locator
 		}
 	}
-
 	return ""
 }
 

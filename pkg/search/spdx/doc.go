@@ -113,7 +113,12 @@ func (d *spdxDoc) searchPackages(sm *SpdxModule) []int {
 			return checksums
 		})
 	}
-	return []int{}
+
+	allPkgs := []int{}
+	for i, _ := range d.doc.Packages {
+		allPkgs = append(allPkgs, i)
+	}
+	return allPkgs
 }
 
 func (d *spdxDoc) matchEngine(sm *SpdxModule, matchCriteria string, mfunc func(*v2_3.Package) []string) []int {

@@ -14,27 +14,24 @@
 
 package search
 
-import "fmt"
-
 func Search(s *SearchParams) error {
 	ps := &pipeSetup{}
 	ps.sParams = s
 	ps.searchFunc = searchFunc
 
-	if s.Json {
+	if s.DoJson() {
 		ps.outputFunc = outputJsonl
-	} else if s.Quiet {
+	} else if s.BeQuiet() {
 		ps.outputFunc = outputQuiet
 	} else {
 		ps.outputFunc = outputBasic
 	}
 
-	if s.Recurse {
+	if s.DoRecurse() {
 		ps.fetchFilesFunc = fetchFilesRecursive
 	} else {
 		ps.fetchFilesFunc = fetchFiles
 	}
-	fmt.Printf("running pipeline %+v\n", ps)
 
 	errs := runPipeline(ps)
 

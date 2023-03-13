@@ -162,7 +162,7 @@ func toUserCmd(cmd *cobra.Command, path string) *UserCmd {
 	license, _ := cmd.Flags().GetBool("licenses")
 	quiet, _ := cmd.Flags().GetBool("quiet")
 	filename, _ := cmd.Flags().GetBool("filename")
-	json, _ := cmd.Flags().GetBool("json")
+	json, _ := cmd.Flags().GetBool("jsonl")
 	printErrors, _ := cmd.Flags().GetBool("print-errors")
 	count, _ := cmd.Flags().GetBool("count")
 	stats, _ := cmd.Flags().GetBool("stats")
