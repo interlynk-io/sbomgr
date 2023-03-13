@@ -40,7 +40,6 @@ func fetchFiles(ps *pipeSetup) <-chan string {
 		}
 
 		if rs.Mode().IsRegular() {
-			fmt.Printf("fullPath: %s\n", ps.sParams.Path)
 			outc <- ps.sParams.Path
 			return
 		}
@@ -68,7 +67,6 @@ func fetchFiles(ps *pipeSetup) <-chan string {
 			}
 
 			fullPath := filepath.Join(ps.sParams.Path, file.Name())
-			fmt.Printf("fullPath: %s\n", fullPath)
 			outc <- fullPath
 		}
 	}()
@@ -132,7 +130,7 @@ out:
 			}
 		}
 	}
-	fmt.Printf("output results processed: %d\n", cnt)
+	//fmt.Printf("output results processed: %d\n", cnt)
 	return outErr
 }
 

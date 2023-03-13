@@ -15,6 +15,7 @@
 package search
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
@@ -27,8 +28,24 @@ func outputQuiet(r *results.Result, nr *SearchParams) error {
 	return fmt.Errorf("no match found")
 }
 func outputJsonl(r *results.Result, nr *SearchParams) error {
+	if nr.BeQuiet() && r.Matched {
+		return nil
+	}
+
+	b, err := json.Marshal(r)
+	if err != nil {
+		return err
+	}
+	fmt.Println(string(b))
 	return nil
 }
 func outputBasic(r *results.Result, nr *SearchParams) error {
+	if nr.BeQuiet() && r.Matched {
+		return nil
+	}
+
+	for _, pkg := range r.Packages {
+		fmt.Println(r.Path, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version, pkg.PURL)
+	}
 	return nil
 }

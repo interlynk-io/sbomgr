@@ -19,11 +19,11 @@ import "github.com/interlynk-io/sbomgr/pkg/licenses"
 type Package struct {
 	Name       string             `json:"name"`
 	Version    string             `json:"version"`
-	PURL       string             `json:"purl"`
-	CPE        []string           `json:"cpe"`
-	Direct     bool               `json:"direct"`
-	PathToRoot []string           `json:"path_to_root"`
-	License    []licenses.License `json:"license"`
+	PURL       string             `json:"purl,omitempty"`
+	CPE        []string           `json:"cpe,omitempty"`
+	Direct     bool               `json:"direct,omitempty"`
+	PathToRoot []string           `json:"path_to_root,omitempty"`
+	License    []licenses.License `json:"license,omitempty"`
 }
 
 type File struct {

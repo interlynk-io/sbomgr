@@ -15,8 +15,6 @@
 package spdx
 
 import (
-	"fmt"
-
 	"github.com/interlynk-io/sbomgr/pkg/search/options"
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
 )
@@ -40,6 +38,5 @@ func (s *SpdxModule) Search() (*results.Result, error) {
 		return nil, err
 	}
 	pkgIdx := doc.searchPackages(s)
-	fmt.Printf("file:%s spec:%s pkgIdx: %v", s.ro.CurrentPath, s.ro.SbomSpecType, pkgIdx)
 	return doc.constructResults(s, pkgIdx)
 }
