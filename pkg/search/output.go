@@ -24,49 +24,52 @@ import (
 	tw "github.com/olekukonko/tablewriter"
 )
 
-func outputQuiet(r *results.Result, nr *SearchParams) error {
+func outputQuiet(r *results.Result, nr *SearchParams) (int, error) {
 	if r.Matched {
-		return nil
+		return 1, nil
 	}
-	return fmt.Errorf("no match found")
+	return 0, fmt.Errorf("no match found")
 }
-func outputJsonl(r *results.Result, nr *SearchParams) error {
+func outputJsonl(r *results.Result, nr *SearchParams) (int, error) {
+	matchedPkgCount := len(r.Packages)
+
 	if nr.DoCount() {
 		if r.Matched {
-			return nil
+			return matchedPkgCount, nil
 		}
-		return fmt.Errorf("no match found")
+		return matchedPkgCount, fmt.Errorf("no match found")
 	}
 	if r.Error != "" && nr.DoPrintErrors() {
-		return fmt.Errorf("{\"path\":%s, \"error\": %s}", r.Path, r.Error)
+		return matchedPkgCount, fmt.Errorf("{\"path\":%s, \"error\": %s}", r.Path, r.Error)
 	}
 
 	// Looks like we have no packages that match the search criteria
 	if len(r.Packages) == 0 {
-		return fmt.Errorf("no match found")
+		return matchedPkgCount, fmt.Errorf("no match found")
 	}
 
 	b, err := json.Marshal(r)
 	if err != nil {
-		return fmt.Errorf("error marshalling json: %w", err)
+		return matchedPkgCount, fmt.Errorf("error marshalling json: %w", err)
 	}
 	fmt.Println(string(b))
-	return nil
+	return matchedPkgCount, nil
 }
-func outputBasic(r *results.Result, nr *SearchParams) error {
+func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
+	matchedPkgCount := len(r.Packages)
 	if nr.DoCount() {
 		if r.Matched {
-			return nil
+			return matchedPkgCount, nil
 		}
-		return fmt.Errorf("no match found")
+		return matchedPkgCount, fmt.Errorf("no match found")
 	}
 
 	if r.Error != "" && nr.DoPrintErrors() {
-		return fmt.Errorf("path:%s error: %s", r.Path, r.Error)
+		return matchedPkgCount, fmt.Errorf("path:%s error: %s", r.Path, r.Error)
 	}
 	// Looks like we have no packages that match the search criteria
 	if len(r.Packages) == 0 {
-		return fmt.Errorf("no match found")
+		return matchedPkgCount, fmt.Errorf("no match found")
 	}
 
 	data := [][]string{}
@@ -84,7 +87,6 @@ func outputBasic(r *results.Result, nr *SearchParams) error {
 			}
 			p = append(p, strings.Join(b, ","))
 		}
-		//fmt.Println(r.Path, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version, pkg.PURL)
 		data = append(data, p)
 	}
 
@@ -102,29 +104,45 @@ func outputBasic(r *results.Result, nr *SearchParams) error {
 	table.AppendBulk(data)
 	table.Render()
 
-	return nil
+	return matchedPkgCount, nil
 }
 
-func handleFinalOutput(nr *SearchParams, outputErrs []error) error {
-	matchedCount := 0
+type outputJson struct {
+	SbomFilesMatched int `json:"sbom_files_matched"`
+	PackagesMatched  int `json:"packages_matched"`
+}
+
+func handleFinalOutput(nr *SearchParams, matched []int, outputErrs []error) error {
+	matchedSbomFilesCount := 0
+	matchedItems := 0
+
+	for _, pkgCnt := range matched {
+		matchedItems += pkgCnt
+	}
 
 	for _, err := range outputErrs {
 		if err == nil {
-			matchedCount++
+			matchedSbomFilesCount++
 		}
 	}
 
 	if nr.DoCount() && nr.DoJson() {
-		fmt.Printf("{\"count\": %d}\n", matchedCount)
+		j := outputJson{
+			SbomFilesMatched: matchedSbomFilesCount,
+			PackagesMatched:  matchedItems,
+		}
+		b, _ := json.Marshal(j)
+		fmt.Println(string(b))
 		return nil
 	}
 
 	if nr.DoCount() && (!nr.DoJson() || !nr.BeQuiet()) {
-		fmt.Printf("count: %d\n", matchedCount)
+		fmt.Printf("sbom_files_matched: %d\n", matchedSbomFilesCount)
+		fmt.Printf("packages_matched: %d\n", matchedItems)
 		return nil
 	}
 
-	if matchedCount == 0 {
+	if matchedSbomFilesCount == 0 {
 		return fmt.Errorf("no matches found")
 	}
 

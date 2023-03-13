@@ -60,7 +60,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolP("print-errors", "p", false, "include errors in output")
 
 	//stats Control
-	rootCmd.PersistentFlags().BoolP("count", "c", false, "suppress normal output, print count of matching sbom with pattern")
+	rootCmd.PersistentFlags().BoolP("count", "c", false, "suppress normal output, print count of matching packages with pattern")
 	rootCmd.PersistentFlags().BoolP("stats", "s", false, "suppress normal output, print stats of matching packages/files")
 	rootCmd.MarkFlagsMutuallyExclusive("count", "stats")
 	rootCmd.PersistentFlags().MarkHidden("stats")
