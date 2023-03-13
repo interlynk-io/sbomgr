@@ -35,7 +35,7 @@ func Search(s *SearchParams) error {
 		ps.fetchFilesFunc = fetchFiles
 	}
 
-	errs := runPipeline(ps)
+	matched, errs := runPipeline(ps)
 
-	return handleFinalOutput(s, errs)
+	return handleFinalOutput(s, matched, errs)
 }

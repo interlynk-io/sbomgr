@@ -109,9 +109,10 @@ func fetchFilesRecursive(ps *pipeSetup) <-chan string {
 	return outc
 }
 
-func outputResults(ps *pipeSetup, sr <-chan *results.Result, errc <-chan error) []error {
+func outputResults(ps *pipeSetup, sr <-chan *results.Result, errc <-chan error) ([]int, []error) {
 	var outErr []error
 	var cnt int = 0
+	var matchedPkgsCnt []int
 out:
 	for {
 		select {
@@ -122,8 +123,9 @@ out:
 				break out
 			}
 			cnt += 1
-			e := ps.outputFunc(result, ps.sParams)
+			matched, e := ps.outputFunc(result, ps.sParams)
 			outErr = append(outErr, e)
+			matchedPkgsCnt = append(matchedPkgsCnt, matched)
 		case err := <-errc:
 			if err != nil {
 				fmt.Printf("error: %v\n", err)
@@ -131,7 +133,7 @@ out:
 		}
 	}
 	//fmt.Printf("output results processed: %d\n", cnt)
-	return outErr
+	return matchedPkgsCnt, outErr
 }
 
 func stepSearch(ps *pipeSetup, inPathc <-chan string) (<-chan *results.Result, <-chan error) {
@@ -196,11 +198,11 @@ func merge(ctx context.Context, err ...<-chan error) <-chan error {
 type pipeSetup struct {
 	sParams        *SearchParams
 	searchFunc     func(string, options.SearchOptions) *results.Result
-	outputFunc     func(*results.Result, *SearchParams) error
+	outputFunc     func(*results.Result, *SearchParams) (int, error)
 	fetchFilesFunc func(*pipeSetup) <-chan string
 }
 
-func runPipeline(sp *pipeSetup) []error {
+func runPipeline(sp *pipeSetup) ([]int, []error) {
 	pathsChan := sp.fetchFilesFunc(sp)
 	resultsChan, errorChan := stepSearch(sp, pathsChan)
 	allErrorChan := merge(sp.sParams.Ctx, errorChan)
