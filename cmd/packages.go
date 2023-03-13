@@ -17,12 +17,10 @@ import (
 type UserCmd struct {
 	//Pattern Flags
 	basicRegexp bool
-	fixedString bool
 
 	//Matching Control
-	ignoreCase  bool
-	invertMatch bool
-	directDeps  bool
+	ignoreCase bool
+	directDeps bool
 
 	//Output Control
 	license     bool
@@ -126,7 +124,6 @@ func toSearchParams(ctx context.Context, cmd *UserCmd) *search.SearchParams {
 
 	sp.Regexp = cmd.basicRegexp
 	sp.IgnoreCase = cmd.ignoreCase
-	sp.InvertMatch = cmd.invertMatch
 	sp.DirectDeps = cmd.directDeps
 
 	sp.License = cmd.license
@@ -156,9 +153,7 @@ func toSearchParams(ctx context.Context, cmd *UserCmd) *search.SearchParams {
 func toUserCmd(cmd *cobra.Command, path string) *UserCmd {
 	cUser := &UserCmd{}
 	basicRegexp, _ := cmd.Flags().GetBool("extended-regexp")
-	fixedString, _ := cmd.Flags().GetBool("fixed-string")
 	ignoreCase, _ := cmd.Flags().GetBool("ignore-case")
-	invertMatch, _ := cmd.Flags().GetBool("invert-match")
 	directDeps, _ := cmd.Flags().GetBool("direct")
 	license, _ := cmd.Flags().GetBool("license")
 	quiet, _ := cmd.Flags().GetBool("quiet")
@@ -177,9 +172,7 @@ func toUserCmd(cmd *cobra.Command, path string) *UserCmd {
 	hash, _ := cmd.Flags().GetString("checksum")
 
 	cUser.basicRegexp = basicRegexp
-	cUser.fixedString = fixedString
 	cUser.ignoreCase = ignoreCase
-	cUser.invertMatch = invertMatch
 	cUser.directDeps = directDeps
 	cUser.license = license
 	cUser.quiet = quiet
