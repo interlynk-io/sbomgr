@@ -31,6 +31,12 @@ func outputQuiet(r *results.Result, nr *SearchParams) error {
 	return fmt.Errorf("no match found")
 }
 func outputJsonl(r *results.Result, nr *SearchParams) error {
+	if nr.DoCount() {
+		if r.Matched {
+			return nil
+		}
+		return fmt.Errorf("no match found")
+	}
 	if r.Error != "" && nr.DoPrintErrors() {
 		return fmt.Errorf("{\"path\":%s, \"error\": %s}", r.Path, r.Error)
 	}
@@ -48,6 +54,13 @@ func outputJsonl(r *results.Result, nr *SearchParams) error {
 	return nil
 }
 func outputBasic(r *results.Result, nr *SearchParams) error {
+	if nr.DoCount() {
+		if r.Matched {
+			return nil
+		}
+		return fmt.Errorf("no match found")
+	}
+
 	if r.Error != "" && nr.DoPrintErrors() {
 		return fmt.Errorf("path:%s error: %s", r.Path, r.Error)
 	}

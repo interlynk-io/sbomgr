@@ -46,13 +46,11 @@ func Execute() {
 func init() {
 	//Pattern
 	rootCmd.PersistentFlags().BoolP("extended-regexp", "E", false, "intrepret filters as regular expressions, https://github.com/google/re2/wiki/Syntax")
-	rootCmd.PersistentFlags().BoolP("fixed-strings", "F", true, "interpret filters as fixed strings, default")
-	rootCmd.MarkFlagsMutuallyExclusive("extended-regexp", "fixed-strings")
 
 	//Matching Control
 	rootCmd.PersistentFlags().BoolP("ignore-case", "i", false, "ignore case distinctions in filters, lowers the package/file criterias")
-	rootCmd.PersistentFlags().BoolP("invert-match", "v", false, "packages or files that dont match")
 	rootCmd.PersistentFlags().BoolP("direct-deps", "d", false, "search direct dependencies only, default is to search all packages/files")
+	rootCmd.PersistentFlags().MarkHidden("direct-deps")
 
 	//Output Control
 	rootCmd.PersistentFlags().BoolP("license", "l", false, "output with licenses")
@@ -65,6 +63,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolP("count", "c", false, "suppress normal output, print count of matching sbom with pattern")
 	rootCmd.PersistentFlags().BoolP("stats", "s", false, "suppress normal output, print stats of matching packages/files")
 	rootCmd.MarkFlagsMutuallyExclusive("count", "stats")
+	rootCmd.PersistentFlags().MarkHidden("stats")
 
 	//Directory Control
 	rootCmd.PersistentFlags().BoolP("recurse", "r", false, "recurse into subdirectories")
