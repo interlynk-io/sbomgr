@@ -22,13 +22,10 @@ import (
 type CdxModule struct{}
 
 func (c *CdxModule) Search(ro *options.RuntimeOptions, opts options.SearchOptions) (*results.Result, error) {
-	return &results.Result{
-		Path:           ro.CurrentPath,
-		Format:         string(ro.SbomFileFormat),
-		Spec:           string(ro.SbomSpecType),
-		ProductName:    "cdxtest",
-		ProductVersion: "1.0",
-		Packages:       []results.Package{},
-		Files:          []results.File{},
-	}, nil
+	doc, err := loadDoc(ro, opts)
+	if err != nil {
+		return nil, err
+	}
+	pkgIdx := doc.searchPackages()
+	return doc.constructResults(pkgIdx)
 }
