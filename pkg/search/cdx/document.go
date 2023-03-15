@@ -58,8 +58,8 @@ func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*cdxDoc, e
 		comps = append(comps, bom.Metadata.Component)
 	}
 	if bom.Components != nil {
-		for _, comp := range *bom.Components {
-			comps = append(comps, &comp)
+		for i, _ := range *bom.Components {
+			comps = append(comps, &(*bom.Components)[i])
 		}
 	}
 
