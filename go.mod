@@ -3,6 +3,7 @@ module github.com/interlynk-io/sbomgr
 go 1.20
 
 require (
+	github.com/CycloneDX/cyclonedx-go v0.7.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spdx/tools-golang v0.4.0
 	github.com/spf13/cobra v1.6.1
