@@ -75,4 +75,5 @@ func init() {
 
 	//Resource Control
 	rootCmd.PersistentFlags().IntP("cpus", "", 0, "restrict number of cpus, default is all")
+	rootCmd.PersistentFlags().MarkHidden("cpus")
 }
