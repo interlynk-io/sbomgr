@@ -25,6 +25,7 @@ builds:
       - windows 
     goarch:
       - amd64
+      - arm64
     ldflags:
       - "{{ .Env.LDFLAGS }}"
     env: 
@@ -41,3 +42,9 @@ snapshot:
 release:
   prerelease: allow 
   draft: true 
+
+
+
+
+
+
