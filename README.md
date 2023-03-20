@@ -105,6 +105,16 @@ packages_matched: 2
     },
 ```
 
+
+#### During CI check if a malicious package is present??
+```sh
+➜  sbomgr packages -qN 'abbrev' ~/tmp/app.spdx.json
+➜  echo $?
+0
+➜  sbomgr packages -qN 'abbrev-random' ~/tmp/app.spdx.json
+➜  echo $?
+1
+```
 # Search flags 
 
 ## Packages 
@@ -155,6 +165,7 @@ all of these match criteria are exclusive to each other.
 - Search using CVE-ID.
 - Search only direct dependencies.
 - Search until a specified depth.
+- Provide a list of malicious packages
 
 # SBOM Samples
 - A sample set of SBOM is present in the [samples](https://github.com/interlynk-io/sbomgr/tree/main/samples) directory above.
