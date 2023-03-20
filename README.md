@@ -14,12 +14,12 @@
  limitations under the License.
 -->
 
-# `sbomgr`: Search SBOMs
+# `sbomgr`: SBOM Grep :mag: - Search through SBOMs
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/interlynk-io/sbomgr.svg)](https://pkg.go.dev/github.com/interlynk-io/sbomgr)
 [![Go Report Card](https://goreportcard.com/badge/github.com/interlynk-io/sbomgr)](https://goreportcard.com/report/github.com/interlynk-io/sbomgr)
 
-`sbomgr` helps you search sboms based on criteria like name, checksum, cpe and purl. 
+`sbomgr` is a grep like command line utility to help search the SBOM repository based on criteria like the name, checksum, CPE, and PURL.
 
 ```sh
 go install github.com/interlynk-io/sbomgr@latest
@@ -27,45 +27,45 @@ go install github.com/interlynk-io/sbomgr@latest
 other installations [options](#installation)
 
 # Basic usage
-Search for packages with exact name match "abbrev". 
+Search for packages with exact name matching "abbrev". 
 ```sh
 sbomgr packages -N 'abbrev' <sbom file or dir>
 ```
 
-Search for packages with regexp name match "log4"
+Search for packages with regexp name matching "log4"
 ```sh
 sbomgr packages -EN 'log4' <sbom file or dir>
 ```
 # Features
-- SBOM format agnostic, we support  SPDX and CycloneDX. 
-- Fast. 
+- SBOM format agnostic and currently supports searching through SPDX and CycloneDX. 
+- Blazing Fast :rocket:  
 - Output search results as [jsonl](https://jsonlines.org/).
-- Supports [regex](https://github.com/google/re2/wiki/Syntax)
+- Supports RE2 [regular expressions](https://github.com/google/re2/wiki/Syntax)
 
 
 # Use cases 
-Lets say you have a folder/s of sboms. We wanted to answer the following questions
+`sbomgr` can answer some of the most common SBOM use cases by searching an SBOM file or SBOM repository.
 
-#### how many packages & sboms files exists?
+#### How many SBOM and packages exist in the repository?
 ```sh
 ➜ sbomgr packages -c ~/data/sbom-repo/docker-images
 sbom_files_matched: 86
 packages_matched: 33556
 ```
-#### Are there any packages with zlib in the name?
+#### Are there packages with `zlib` in the name?
 ```sh
 ➜ sbomgr packages -cEN 'zlib' ~/data/sbom-repo/docker-images
 sbom_files_matched: 71
 packages_matched: 145
 ```
-#### Are there any packages with a known shasum 
+#### Are there packages with a given checksum?
 ```sh
 ➜ sbomgr packages -c -H '5c260231de4f62ee26888776190b4c3fda6cbe14' ~/data/sbom-repo/docker-images
 sbom_files_matched: 2
 packages_matched: 2
 ```
 
-#### Are there any packages with .zip files and output it in json?
+#### Create a json report of packages with .zip files
 ```sh
 ➜ sbomgr packages -jrE -N '\.zip$' ~/data/ | jq .
 {
@@ -84,7 +84,7 @@ packages_matched: 2
 }
 ```
 
-#### List all packages of an sbom with their licenses
+#### Create a json report of all licenses included in an sbom
 ```sh
 ➜ sbomgr packages -jl ~/data/some-sboms/julia.spdx | jq .
 {
@@ -108,7 +108,7 @@ packages_matched: 2
 # Search flags 
 
 ## Packages 
-This section explains the flags relevant o the packages search feature.
+This section explains the flags relevant to the packages search feature.
 The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour. 
 
 #### *Match Criteria*
@@ -150,13 +150,14 @@ all of these match criteria are exclusive to each other.
 - `--cdx` searches only files which are CycloneDX.
 
 # Future work
-- Search using files
-- Search using tool metadata
-- Search using CVE-ID
-- Search only direct dependencies 
+- Search using files.
+- Search using tool metadata.
+- Search using CVE-ID.
+- Search only direct dependencies.
+- Search until a specified depth.
 
 # SBOM Samples
-- A sample set of SBOM is present in the [samples](https://github.com/interlynk-io/sbomgr/tree/main/samples) directory above
+- A sample set of SBOM is present in the [samples](https://github.com/interlynk-io/sbomgr/tree/main/samples) directory above.
 - [SBOM Benchmark](https://www.sbombenchmark.dev) is a repository of SBOM and quality score for most popular containers and repositories
 - [SBOM Explorer](https://github.com/interlynk-io/sbomex) is a command line utility to search and pull SBOMs
 
