@@ -105,6 +105,49 @@ packages_matched: 2
     },
 ```
 
+# Search flags 
+
+## Packages 
+This section explains the flags relevant o the packages search feature.
+The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour. 
+
+#### *Match Criteria*
+---
+- `-N` or `--name` used for package/component name search.
+- `-C` or `--cpe` used for package/component cpe search. 
+- `-P` or `--purl` used for pacakge/component purl search. 
+- `-H` or `--checksum` used for package/component checksum value search. 
+
+all of these match criteria are exclusive to each other. 
+
+#### *Patter Matching*  
+---------
+- `-E` or `--extended-regexp` flag can be used to indicate if the match criteria is a regular expression. Syntax supported is https://github.com/google/re2/wiki/Syntax.
+
+#### *Matching Control*
+-----
+- `-i` or `--ignore-case` case insensitive matching. 
+
+#### *Output Control*
+----
+- `-l` or `--license` this includes the license of the package/component in the output. 
+- `-q` or `--quiet` this suppresses all output of the tool, the return value of the tool is 0 indicating success, if it finds the search criteria. 
+- `--no-filename` removes the filename from the output. 
+- `-j` or `--jsonl` outputs the search results in [jsonl](https://jsonlines.org/).
+- `-p` or `--print-errors` includes errors encoundered during searching. Default is to ignore them. 
+
+#### *Stats Control*
+----
+- `-c` or `--count` suppresses the normal output and print matching counts of sbom filenames and packages.
+
+#### *Directory Control*
+----
+- `-r` or `--recurse` when set, recursively scans all sub directories.
+
+#### *Spec Control*
+----
+- `--spdx` searches only files which are SPDX.
+- `--cdx` searches only files which are CycloneDX.
 
 # Future work
 - Search using files
