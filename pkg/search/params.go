@@ -37,6 +37,7 @@ type SearchParams struct {
 	Filename    bool
 	Json        bool
 	PrintErrors bool
+	Formats     []string
 
 	//stats Control
 	Count bool
@@ -139,4 +140,8 @@ func (s *SearchParams) SearchPURL() string {
 
 func (s *SearchParams) SearchHash() string {
 	return s.Hash
+}
+
+func (s *SearchParams) HasOutputFormats() bool {
+	return len(s.Formats) > 0
 }

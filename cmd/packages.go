@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strings"
 
 	"github.com/interlynk-io/sbomgr/pkg/logger"
 	"github.com/interlynk-io/sbomgr/pkg/search"
@@ -51,6 +52,9 @@ type UserCmd struct {
 
 	//Search Path
 	path string
+
+	//Output Format
+	formats []string
 }
 
 // packagesCmd represents the packages command
@@ -82,6 +86,8 @@ func init() {
 	packagesCmd.Flags().StringP("purl", "P", "", "filter packages by purl")
 	packagesCmd.Flags().StringP("checksum", "H", "", "filter packages by checksum")
 	packagesCmd.MarkFlagsMutuallyExclusive("cpe", "purl", "name", "checksum")
+
+	packagesCmd.Flags().StringP("output-format", "O", "", "user-defined output format, comma separated list of columns. <link> ")
 }
 
 func validatePath(path string) error {
@@ -111,6 +117,15 @@ func validateFlags(cmd *UserCmd) error {
 
 		if _, err := regexp.Compile(cmd.hash); err != nil {
 			return fmt.Errorf("invalid regular expression: %w", err)
+		}
+	}
+
+	if cmd.formats != nil {
+		for _, f := range cmd.formats {
+			_, ok := search.OutputFormatOptions[f]
+			if !ok {
+				return fmt.Errorf("invalid output format: %s", f)
+			}
 		}
 	}
 	return nil
@@ -147,6 +162,8 @@ func toSearchParams(ctx context.Context, cmd *UserCmd) *search.SearchParams {
 	sp.PURL = cmd.purl
 	sp.Hash = cmd.hash
 
+	sp.Formats = cmd.formats
+
 	return sp
 }
 
@@ -170,6 +187,7 @@ func toUserCmd(cmd *cobra.Command, path string) *UserCmd {
 	cpe, _ := cmd.Flags().GetString("cpe")
 	purl, _ := cmd.Flags().GetString("purl")
 	hash, _ := cmd.Flags().GetString("checksum")
+	formats, _ := cmd.Flags().GetString("output-format")
 
 	cUser.basicRegexp = basicRegexp
 	cUser.ignoreCase = ignoreCase
@@ -191,5 +209,17 @@ func toUserCmd(cmd *cobra.Command, path string) *UserCmd {
 	cUser.hash = hash
 
 	cUser.path = path
+
+	sanitize := func(s string, sep string) []string {
+		splitStrings := strings.Split(s, sep)
+		for i, str := range splitStrings {
+			splitStrings[i] = strings.ToLower(strings.TrimSpace(str))
+		}
+		return splitStrings
+	}
+
+	if formats != "" {
+		cUser.formats = sanitize(formats, ",")
+	}
 	return cUser
 }

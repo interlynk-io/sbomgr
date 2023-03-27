@@ -24,12 +24,27 @@ import (
 	tw "github.com/olekukonko/tablewriter"
 )
 
+var OutputFormatOptions = map[string]bool{
+	"filen": true, //filename
+	"tooln": true, //toolname
+	"toolv": true, //toolversion
+	"docn":  true, //doc name
+	"docv":  true, //doc version
+	"cpe":   true, //cpe
+	"purl":  true, //purl
+	"pkgn":  true, //component name
+	"pkgv":  true, //component version
+	"pkgl":  true, //component license
+	"specn": true, //spec name
+}
+
 func outputQuiet(r *results.Result, nr *SearchParams) (int, error) {
 	if r.Matched {
 		return 1, nil
 	}
 	return 0, fmt.Errorf("no match found")
 }
+
 func outputJsonl(r *results.Result, nr *SearchParams) (int, error) {
 	matchedPkgCount := len(r.Packages)
 
@@ -55,6 +70,7 @@ func outputJsonl(r *results.Result, nr *SearchParams) (int, error) {
 	fmt.Println(string(b))
 	return matchedPkgCount, nil
 }
+
 func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
 	matchedPkgCount := len(r.Packages)
 	if nr.DoCount() {
@@ -72,34 +88,85 @@ func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
 		return matchedPkgCount, fmt.Errorf("no match found")
 	}
 
+	isEmpty := func(s []string) bool {
+		for _, v := range s {
+			if strings.Trim(v, " ") != "" {
+				return false
+			}
+		}
+		return true
+	}
+
 	data := [][]string{}
 
 	for _, pkg := range r.Packages {
 		p := []string{}
-		if !nr.DoFilename() {
-			p = append(p, r.Path)
-		}
-		p = append(p, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version, pkg.PURL)
-		if nr.DoLicense() {
-			var b []string
-			for _, l := range pkg.Licenses {
-				b = append(b, l.Name())
+		if nr.HasOutputFormats() {
+			for _, f := range nr.Formats {
+				switch f {
+				case "filen":
+					p = append(p, r.Path)
+				case "tooln":
+					p = append(p, r.ToolName)
+				case "toolv":
+					p = append(p, r.ToolVersion)
+				case "docn":
+					p = append(p, r.ProductName)
+				case "docv":
+					p = append(p, r.ProductVersion)
+				case "cpe":
+					if len(pkg.CPE) > 0 {
+						cpef := fmt.Sprintf("%s[%d more]", pkg.CPE[0], len(pkg.CPE))
+						p = append(p, cpef)
+					}
+				case "purl":
+					p = append(p, pkg.PURL)
+				case "pkgn":
+					p = append(p, pkg.Name)
+				case "pkgv":
+					p = append(p, pkg.Version)
+				case "pkgl":
+					var b []string
+					for _, l := range pkg.Licenses {
+						b = append(b, l.Name())
+					}
+					p = append(p, strings.Join(b, ","))
+				case "specn":
+					p = append(p, r.Spec)
+				}
 			}
-			p = append(p, strings.Join(b, ","))
+
+		} else {
+			if !nr.DoFilename() {
+				p = append(p, r.Path)
+			}
+			p = append(p, r.ProductName, r.ProductVersion, pkg.Name, pkg.Version)
+			if nr.DoLicense() {
+				var b []string
+				for _, l := range pkg.Licenses {
+					b = append(b, l.Name())
+				}
+				p = append(p, strings.Join(b, ","))
+			}
 		}
-		data = append(data, p)
+
+		if !isEmpty(p) {
+			data = append(data, p)
+		}
 	}
 
 	table := tw.NewWriter(os.Stdout)
-	table.SetAutoWrapText(true)
+	table.SetAutoWrapText(false)
 	table.SetAutoFormatHeaders(true)
-	table.SetHeaderAlignment(tw.ALIGN_RIGHT)
+	table.SetHeaderAlignment(tw.ALIGN_LEFT)
+	table.SetAlignment(tw.ALIGN_LEFT)
+
 	table.SetCenterSeparator("")
 	table.SetColumnSeparator("")
 	table.SetRowSeparator("")
 	table.SetHeaderLine(false)
 	table.SetBorder(false)
-	table.SetTablePadding(" ")
+	table.SetTablePadding("\t")
 	table.SetNoWhiteSpace(true)
 	table.AppendBulk(data)
 	table.Render()
@@ -108,7 +175,7 @@ func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
 }
 
 type outputJson struct {
-	SbomFilesMatched int `json:"sbom_files_matched"`
+	SbomFilesMatched int `json:"files_matched"`
 	PackagesMatched  int `json:"packages_matched"`
 }
 
@@ -137,7 +204,7 @@ func handleFinalOutput(nr *SearchParams, matched []int, outputErrs []error) erro
 	}
 
 	if nr.DoCount() && (!nr.DoJson() || !nr.BeQuiet()) {
-		fmt.Printf("sbom_files_matched: %d\n", matchedSbomFilesCount)
+		fmt.Printf("files_matched: %d\n", matchedSbomFilesCount)
 		fmt.Printf("packages_matched: %d\n", matchedItems)
 		return nil
 	}

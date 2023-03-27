@@ -145,6 +145,18 @@ all of these match criteria are exclusive to each other.
 - `--no-filename` removes the filename from the output. 
 - `-j` or `--jsonl` outputs the search results in [jsonl](https://jsonlines.org/).
 - `-p` or `--print-errors` includes errors encoundered during searching. Default is to ignore them. 
+- `-O` or `--output-format` user-defined output format. Options are listed below 
+ - `filen` - filepath
+ - `tooln` - tool with which sbom was generated, only prints the first one
+ - `toolv` - tool version
+ - `docn`  - sbom document name
+ - `docv`  - sbom document version
+ - `cpe`   - package cpe, only prints the first one, indicates how many cpe's exists.
+ - `purl`  - package purl
+ - `pkgn`  - package name 
+ - `pkgv`  - package version
+ - `pkgl`  - package licenses
+ - `specn` - spec of the sbom document, spdx or cdx. 
 
 #### *Stats Control*
 ----

@@ -31,16 +31,26 @@ func (s *spdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 		}, nil
 	}
 
-	return &results.Result{
+	tools := s.toolInfo()
+
+	result := &results.Result{
 		Path:           s.ro.CurrentPath,
 		Format:         string(s.ro.SbomFileFormat),
 		Spec:           string(s.ro.SbomSpecType),
 		ProductName:    s.docName(),
-		ProductVersion: "",
+		ProductVersion: s.docVersion(),
 		Packages:       s.pkgResults(pIndices),
 		Files:          []results.File{},
 		Matched:        len(pIndices) > 0,
-	}, nil
+	}
+
+	// pick the first for now, later we probably need to return all
+	if len(tools) > 0 {
+		result.ToolName = tools[0].name
+		result.ToolVersion = tools[0].version
+	}
+
+	return result, nil
 }
 
 func (s *spdxDoc) pkgResults(indices []int) []results.Package {
@@ -50,6 +60,7 @@ func (s *spdxDoc) pkgResults(indices []int) []results.Package {
 			Name:    s.doc.Packages[idx].PackageName,
 			Version: s.doc.Packages[idx].PackageVersion,
 			PURL:    s.Purl(idx),
+			CPE:     s.CPEs(idx),
 		}
 		if s.opts.DoLicense() {
 			ls := s.licenses(idx)
@@ -149,4 +160,50 @@ func (s *spdxDoc) licenses(index int) []licenses.License {
 
 func (s *spdxDoc) docName() string {
 	return s.doc.DocumentName
+}
+
+func (s *spdxDoc) docVersion() string {
+	return s.doc.DocumentNamespace
+}
+
+type tool struct {
+	name    string
+	version string
+}
+
+func (s *spdxDoc) toolInfo() []tool {
+	tools := []tool{}
+
+	if s.doc.CreationInfo == nil {
+		return tools
+	}
+
+	//https://spdx.github.io/spdx-spec/v2.3/document-creation-information/#68-creator-field
+	//spdx2.3 spec says If the SPDX document was created using a software tool,
+	//indicate the name and version for that tool
+	extractVersion := func(name string) (string, string) {
+		//check if the version is a single word, i.e no spaces
+		if strings.Contains(name, " ") {
+			return name, ""
+		}
+		//check if name has - in it
+		tool, ver, ok := strings.Cut(name, "-")
+
+		if !ok {
+			return name, ""
+		}
+		return tool, ver
+	}
+
+	for _, c := range s.doc.CreationInfo.Creators {
+		ctType := strings.ToLower(c.CreatorType)
+		if ctType != "tool" {
+			continue
+		}
+		t := tool{}
+		t.name, t.version = extractVersion(c.Creator)
+		tools = append(tools, t)
+	}
+
+	return tools
 }
