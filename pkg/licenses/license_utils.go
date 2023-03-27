@@ -80,3 +80,9 @@ func getIndividualLicenses(lic string) []string {
 	sort.Strings(lics)
 	return lics
 }
+
+func LicenseObjectByName(name string) License {
+	return meta{
+		name: name,
+	}
+}
