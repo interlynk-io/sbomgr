@@ -52,21 +52,24 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 	for _, val := range pIndices {
 		comp := doc.allComps[val]
 
-		pkgs = append(pkgs, results.Package{
+		res := results.Package{
 			Name:    comp.Name,
 			Version: comp.Version,
 			PURL:    comp.PackageURL,
-		})
+		}
+
 		if doc.opts.DoLicense() {
 			ls := doc.licenses(comp)
 			for _, lic := range ls {
-				pkgs[val].Licenses = append(pkgs[val].Licenses, licenses.LicenseStore{
+				res.Licenses = append(res.Licenses, licenses.LicenseStore{
 					Nm: lic.Name(),
 					Ss: lic.ShortID(),
 					Ds: lic.Deprecated(),
 				})
 			}
 		}
+
+		pkgs = append(pkgs, res)
 	}
 
 	return pkgs
@@ -87,7 +90,11 @@ func (c *cdxDoc) licenses(comp *cydx.Component) []licenses.License {
 		if cl.Expression != "" {
 			addLicense(&lics, licenses.NewLicenseFromID(cl.Expression))
 		} else if cl.License != nil {
-			addLicense(&lics, licenses.NewLicenseFromID(cl.License.ID))
+			if cl.License.ID != "" {
+				addLicense(&lics, licenses.NewLicenseFromID(cl.License.ID))
+			} else {
+				addLicense(&lics, []licenses.License{licenses.LicenseObjectByName(cl.License.Name)})
+			}
 		}
 	}
 
