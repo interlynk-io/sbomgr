@@ -87,7 +87,7 @@ func init() {
 	packagesCmd.Flags().StringP("checksum", "H", "", "filter packages by checksum")
 	packagesCmd.MarkFlagsMutuallyExclusive("cpe", "purl", "name", "checksum")
 
-	packagesCmd.Flags().StringP("output-format", "O", "", "user-defined output format, comma separated list of columns. <link> ")
+	packagesCmd.Flags().StringP("output-format", "O", "", "user-defined output format, comma separated list of columns. https://github.com/interlynk-io/sbomgr#output-control ")
 }
 
 func validatePath(path string) error {
