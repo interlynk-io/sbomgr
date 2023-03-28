@@ -39,7 +39,9 @@ type Result struct {
 	ProductVersion string    `json:"product_version,omitempty"`
 	Packages       []Package `json:"packages,omitempty"`
 	Files          []File    `json:"files,omitempty"`
-	Matched        bool      `json:"matched,omitempty"`
+	ToolName       string    `json:"tool_name,omitempty"`
+	ToolVersion    string    `json:"tool_version,omitempty"`
+	Matched        bool
 }
 
 func NewSearchResult(path, format, spec, err string) *Result {

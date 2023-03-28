@@ -34,7 +34,7 @@ func (doc *cdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 		docVersion = doc.doc.Metadata.Component.Version
 	}
 
-	return &results.Result{
+	result := &results.Result{
 		Path:           doc.ro.CurrentPath,
 		Format:         string(doc.ro.SbomFileFormat),
 		Spec:           string(doc.ro.SbomSpecType),
@@ -43,7 +43,15 @@ func (doc *cdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 		Packages:       doc.pkgResults(pIndices),
 		Files:          []results.File{},
 		Matched:        len(pIndices) > 0,
-	}, nil
+	}
+
+	if doc.doc.Metadata != nil && doc.doc.Metadata.Tools != nil {
+		tools := *doc.doc.Metadata.Tools
+		result.ToolName = tools[0].Name
+		result.ToolVersion = tools[0].Version
+	}
+
+	return result, nil
 }
 
 func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
@@ -56,6 +64,7 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 			Name:    comp.Name,
 			Version: comp.Version,
 			PURL:    comp.PackageURL,
+			CPE:     []string{comp.CPE},
 		}
 
 		if doc.opts.DoLicense() {
