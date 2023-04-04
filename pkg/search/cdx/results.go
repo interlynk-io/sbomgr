@@ -63,8 +63,14 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 		res := results.Package{
 			Name:    comp.Name,
 			Version: comp.Version,
-			PURL:    comp.PackageURL,
-			CPE:     []string{comp.CPE},
+		}
+
+		if len(comp.PackageURL) > 0 {
+			res.PURL = comp.PackageURL
+		}
+
+		if len(comp.CPE) > 0 {
+			res.CPE = []string{comp.CPE}
 		}
 
 		if doc.opts.DoLicense() {

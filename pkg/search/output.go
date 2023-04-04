@@ -107,24 +107,54 @@ func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
 				case "filen":
 					p = append(p, r.Path)
 				case "tooln":
-					p = append(p, r.ToolName)
+					if len(r.ToolName) > 0 {
+						p = append(p, r.ToolName)
+					} else {
+						p = append(p, "[NOTOOL]")
+					}
 				case "toolv":
-					p = append(p, r.ToolVersion)
+					if len(r.ToolVersion) > 0 {
+						p = append(p, r.ToolVersion)
+					} else {
+						p = append(p, "[NOTOOLVER]")
+					}
 				case "docn":
-					p = append(p, r.ProductName)
+					if len(r.ProductName) > 0 {
+						p = append(p, r.ProductName)
+					} else {
+						p = append(p, "[NODOC]")
+					}
 				case "docv":
-					p = append(p, r.ProductVersion)
+					if len(r.ProductVersion) > 0 {
+						p = append(p, r.ProductVersion)
+					} else {
+						p = append(p, "[NODOCVER]")
+					}
 				case "cpe":
 					if len(pkg.CPE) > 0 {
 						cpef := fmt.Sprintf("%s[%d more]", pkg.CPE[0], len(pkg.CPE))
 						p = append(p, cpef)
+					} else {
+						p = append(p, "[NOCPE]")
 					}
 				case "purl":
-					p = append(p, pkg.PURL)
+					if len(pkg.PURL) > 0 {
+						p = append(p, pkg.PURL)
+					} else {
+						p = append(p, "[NOPURL]")
+					}
 				case "pkgn":
-					p = append(p, pkg.Name)
+					if len(pkg.Name) > 0 {
+						p = append(p, pkg.Name)
+					} else {
+						p = append(p, "[NOPKGNAME]")
+					}
 				case "pkgv":
-					p = append(p, pkg.Version)
+					if len(pkg.Version) > 0 {
+						p = append(p, pkg.Version)
+					} else {
+						p = append(p, "[NOPKGVER]")
+					}
 				case "pkgl":
 					var b []string
 					for _, l := range pkg.Licenses {
