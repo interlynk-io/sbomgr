@@ -3,7 +3,7 @@ module github.com/interlynk-io/sbomgr
 go 1.20
 
 require (
-	github.com/CycloneDX/cyclonedx-go v0.7.0
+	github.com/CycloneDX/cyclonedx-go v0.7.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spdx/tools-golang v0.4.0
 	github.com/spf13/cobra v1.6.1
@@ -20,7 +20,6 @@ require (
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/spdx/gordf v0.0.0-20201111095634-7098f93598fb // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/testify v1.8.1 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
