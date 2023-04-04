@@ -59,9 +59,18 @@ func (s *spdxDoc) pkgResults(indices []int) []results.Package {
 		pkgs[i] = results.Package{
 			Name:    s.doc.Packages[idx].PackageName,
 			Version: s.doc.Packages[idx].PackageVersion,
-			PURL:    s.Purl(idx),
-			CPE:     s.CPEs(idx),
 		}
+
+		purls := s.Purl(idx)
+		if len(purls) > 0 {
+			pkgs[i].PURL = purls
+		}
+
+		cpes := s.CPEs(idx)
+		if len(cpes) > 0 {
+			pkgs[i].CPE = cpes
+		}
+
 		if s.opts.DoLicense() {
 			ls := s.licenses(idx)
 			for _, lic := range ls {

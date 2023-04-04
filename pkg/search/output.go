@@ -118,9 +118,15 @@ func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
 					if len(pkg.CPE) > 0 {
 						cpef := fmt.Sprintf("%s[%d more]", pkg.CPE[0], len(pkg.CPE))
 						p = append(p, cpef)
+					} else {
+						p = append(p, "[NOCPE]")
 					}
 				case "purl":
-					p = append(p, pkg.PURL)
+					if len(pkg.PURL) > 0 {
+						p = append(p, pkg.PURL)
+					} else {
+						p = append(p, "[NOPURL]")
+					}
 				case "pkgn":
 					p = append(p, pkg.Name)
 				case "pkgv":
