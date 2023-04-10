@@ -20,6 +20,7 @@ import (
 	"strings"
 
 	cydx "github.com/CycloneDX/cyclonedx-go"
+	"github.com/google/uuid"
 	"github.com/interlynk-io/sbomgr/pkg/detect"
 	"github.com/interlynk-io/sbomgr/pkg/search/options"
 )
@@ -52,24 +53,63 @@ func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*cdxDoc, e
 		return nil, fmt.Errorf("unsupported cdx file format: %s", string(ro.SbomFileFormat))
 	}
 
-	var comps []*cydx.Component
-
-	if bom.Metadata != nil && bom.Metadata.Component != nil {
-		comps = append(comps, bom.Metadata.Component)
-	}
-	if bom.Components != nil {
-		for i, _ := range *bom.Components {
-			comps = append(comps, &(*bom.Components)[i])
-		}
-	}
-
 	doc := &cdxDoc{
 		doc:      bom,
 		ro:       ro,
 		opts:     opts,
-		allComps: comps,
+		allComps: extractAllComponents(bom),
 	}
 	return doc, nil
+}
+
+func extractAllComponents(bom *cydx.BOM) []*cydx.Component {
+	var all_comps []*cydx.Component
+
+	comps := map[string]*cydx.Component{}
+
+	if bom.Metadata != nil && bom.Metadata.Component != nil {
+		walkComponents(&[]cydx.Component{*bom.Metadata.Component}, comps)
+	}
+
+	if bom.Components != nil {
+		walkComponents(bom.Components, comps)
+	}
+
+	for _, v := range comps {
+		all_comps = append(all_comps, v)
+	}
+	return all_comps
+}
+
+func walkComponents(comps *[]cydx.Component, store map[string]*cydx.Component) {
+	if comps == nil {
+		return
+	}
+	for i, c := range *comps {
+		if c.Components != nil {
+			walkComponents(c.Components, store)
+		}
+		if _, ok := store[compID(&c)]; ok {
+			//already present no need to re add it.
+			continue
+		}
+		store[compID(&c)] = &(*comps)[i]
+	}
+}
+
+func compID(comp *cydx.Component) string {
+	if comp.BOMRef != "" {
+		return comp.BOMRef
+	}
+
+	if comp.PackageURL != "" {
+		return comp.PackageURL
+	}
+
+	// A component with no BOMREF or PackageURL is a bad component, so we generate a UUID for it.
+	// This is a temporary solution until we can figure out how to handle this case.
+	id := uuid.New()
+	return id.String()
 }
 
 func (d *cdxDoc) searchPackages() []int {
