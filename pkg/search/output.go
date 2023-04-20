@@ -234,8 +234,8 @@ func handleFinalOutput(nr *SearchParams, matched []int, outputErrs []error) erro
 	}
 
 	if nr.DoCount() && (!nr.DoJson() || !nr.BeQuiet()) {
-		fmt.Printf("files_matched: %d\n", matchedSbomFilesCount)
-		fmt.Printf("packages_matched: %d\n", matchedItems)
+		fmt.Printf("Matching file count: %d\n", matchedSbomFilesCount)
+		fmt.Printf("Matching package count: %d\n", matchedItems)
 		return nil
 	}
 
