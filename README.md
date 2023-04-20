@@ -166,6 +166,8 @@ all of these match criteria are exclusive to each other.
   - `pkgv`  - package version
   - `pkgl`  - package licenses
   - `specn` - spec of the sbom document, spdx or cdx. 
+  - `chkn`  - checksum name
+  - `chkv`  - checksum value 
 
 #### *Stats Control*
 ----

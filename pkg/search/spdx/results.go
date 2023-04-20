@@ -71,6 +71,13 @@ func (s *spdxDoc) pkgResults(indices []int) []results.Package {
 			pkgs[i].CPE = cpes
 		}
 
+		for _, c := range s.doc.Packages[idx].PackageChecksums {
+			pkgs[i].Checksums = append(pkgs[i].Checksums, results.Checksum{
+				Algorithm: string(c.Algorithm),
+				Value:     string(c.Value),
+			})
+		}
+
 		if s.opts.DoLicense() {
 			ls := s.licenses(idx)
 			for _, lic := range ls {
