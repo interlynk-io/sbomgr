@@ -73,6 +73,15 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 			res.CPE = []string{comp.CPE}
 		}
 
+		if comp.Hashes != nil {
+			for _, c := range *comp.Hashes {
+				res.Checksums = append(res.Checksums, results.Checksum{
+					Algorithm: string(c.Algorithm),
+					Value:     string(c.Value),
+				})
+			}
+		}
+
 		if doc.opts.DoLicense() {
 			ls := doc.licenses(comp)
 			for _, lic := range ls {

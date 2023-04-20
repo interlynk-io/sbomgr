@@ -36,6 +36,8 @@ var OutputFormatOptions = map[string]bool{
 	"pkgv":  true, //component version
 	"pkgl":  true, //component license
 	"specn": true, //spec name
+	"chkn":  true, //checksum name
+	"chkv":  true, //checksum version
 }
 
 func outputQuiet(r *results.Result, nr *SearchParams) (int, error) {
@@ -99,73 +101,18 @@ func outputBasic(r *results.Result, nr *SearchParams) (int, error) {
 
 	data := [][]string{}
 
-	for _, pkg := range r.Packages {
+	for idx, pkg := range r.Packages {
 		p := []string{}
-		if nr.HasOutputFormats() {
-			for _, f := range nr.Formats {
-				switch f {
-				case "filen":
-					p = append(p, r.Path)
-				case "tooln":
-					if len(r.ToolName) > 0 {
-						p = append(p, r.ToolName)
-					} else {
-						p = append(p, "[NOTOOL]")
-					}
-				case "toolv":
-					if len(r.ToolVersion) > 0 {
-						p = append(p, r.ToolVersion)
-					} else {
-						p = append(p, "[NOTOOLVER]")
-					}
-				case "docn":
-					if len(r.ProductName) > 0 {
-						p = append(p, r.ProductName)
-					} else {
-						p = append(p, "[NODOC]")
-					}
-				case "docv":
-					if len(r.ProductVersion) > 0 {
-						p = append(p, r.ProductVersion)
-					} else {
-						p = append(p, "[NODOCVER]")
-					}
-				case "cpe":
-					if len(pkg.CPE) > 0 {
-						cpef := fmt.Sprintf("%s[%d more]", pkg.CPE[0], len(pkg.CPE))
-						p = append(p, cpef)
-					} else {
-						p = append(p, "[NOCPE]")
-					}
-				case "purl":
-					if len(pkg.PURL) > 0 {
-						p = append(p, pkg.PURL)
-					} else {
-						p = append(p, "[NOPURL]")
-					}
-				case "pkgn":
-					if len(pkg.Name) > 0 {
-						p = append(p, pkg.Name)
-					} else {
-						p = append(p, "[NOPKGNAME]")
-					}
-				case "pkgv":
-					if len(pkg.Version) > 0 {
-						p = append(p, pkg.Version)
-					} else {
-						p = append(p, "[NOPKGVER]")
-					}
-				case "pkgl":
-					var b []string
-					for _, l := range pkg.Licenses {
-						b = append(b, l.Name())
-					}
-					p = append(p, strings.Join(b, ","))
-				case "specn":
-					p = append(p, r.Spec)
-				}
-			}
 
+		if nr.HasOutputFormats() {
+			noOfChecksums := len(pkg.Checksums)
+			if noOfChecksums > 0 {
+				for id := range pkg.Checksums {
+					data = append(data, customOutput(idx, id, r, nr))
+				}
+			} else {
+				p = customOutput(idx, -1, r, nr)
+			}
 		} else {
 			if !nr.DoFilename() {
 				p = append(p, r.Path)
@@ -244,4 +191,88 @@ func handleFinalOutput(nr *SearchParams, matched []int, outputErrs []error) erro
 	}
 
 	return nil
+}
+
+func customOutput(idx int, chkIdx int, r *results.Result, nr *SearchParams) []string {
+	p := []string{}
+	pkg := r.Packages[idx]
+
+	for _, f := range nr.Formats {
+		switch f {
+		case "filen":
+			p = append(p, r.Path)
+		case "tooln":
+			if len(r.ToolName) > 0 {
+				p = append(p, r.ToolName)
+			} else {
+				p = append(p, "[NOTOOL]")
+			}
+		case "toolv":
+			if len(r.ToolVersion) > 0 {
+				p = append(p, r.ToolVersion)
+			} else {
+				p = append(p, "[NOTOOLVER]")
+			}
+		case "docn":
+			if len(r.ProductName) > 0 {
+				p = append(p, r.ProductName)
+			} else {
+				p = append(p, "[NODOC]")
+			}
+		case "docv":
+			if len(r.ProductVersion) > 0 {
+				p = append(p, r.ProductVersion)
+			} else {
+				p = append(p, "[NODOCVER]")
+			}
+		case "cpe":
+			if len(pkg.CPE) > 0 {
+				cpef := fmt.Sprintf("%s[%d more]", pkg.CPE[0], len(pkg.CPE))
+				p = append(p, cpef)
+			} else {
+				p = append(p, "[NOCPE]")
+			}
+		case "purl":
+			if len(pkg.PURL) > 0 {
+				p = append(p, pkg.PURL)
+			} else {
+				p = append(p, "[NOPURL]")
+			}
+		case "pkgn":
+			if len(pkg.Name) > 0 {
+				p = append(p, pkg.Name)
+			} else {
+				p = append(p, "[NOPKGNAME]")
+			}
+		case "pkgv":
+			if len(pkg.Version) > 0 {
+				p = append(p, pkg.Version)
+			} else {
+				p = append(p, "[NOPKGVER]")
+			}
+		case "pkgl":
+			var b []string
+			for _, l := range pkg.Licenses {
+				b = append(b, l.Name())
+			}
+			p = append(p, strings.Join(b, ","))
+		case "specn":
+			p = append(p, r.Spec)
+		case "chkn":
+			if chkIdx >= 0 {
+				p = append(p, pkg.Checksums[chkIdx].Algorithm)
+			} else {
+				p = append(p, "[NOCHKN]")
+			}
+		case "chkv":
+			if chkIdx >= 0 {
+				p = append(p, pkg.Checksums[chkIdx].Value)
+			} else {
+				p = append(p, "[NOCHKV]")
+			}
+		}
+	}
+
+	return p
+
 }

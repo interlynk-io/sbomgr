@@ -16,6 +16,11 @@ package results
 
 import "github.com/interlynk-io/sbomgr/pkg/licenses"
 
+type Checksum struct {
+	Algorithm string `json:"algorithm"`
+	Value     string `json:"value"`
+}
+
 type Package struct {
 	Name       string                  `json:"name"`
 	Version    string                  `json:"version"`
@@ -24,6 +29,7 @@ type Package struct {
 	Direct     bool                    `json:"direct,omitempty"`
 	PathToRoot []string                `json:"path_to_root,omitempty"`
 	Licenses   []licenses.LicenseStore `json:"license,omitempty"`
+	Checksums  []Checksum              `json:"checksum,omitempty"`
 }
 
 type File struct {
