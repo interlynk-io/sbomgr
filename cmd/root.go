@@ -15,9 +15,13 @@
 package cmd
 
 import (
+	"context"
+	"fmt"
 	"os"
 
+	"github.com/google/go-github/v52/github"
 	"github.com/spf13/cobra"
+	version "sigs.k8s.io/release-utils/version"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -37,6 +41,7 @@ sboms for packages and files.
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	checkIfLatestRelease()
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
@@ -76,4 +81,24 @@ func init() {
 	//Resource Control
 	rootCmd.PersistentFlags().IntP("cpus", "", 0, "restrict number of cpus, default is all")
 	rootCmd.PersistentFlags().MarkHidden("cpus")
+}
+
+func checkIfLatestRelease() {
+	if os.Getenv("INTERLYNK_DISABLE_VERSION_CHECK") != "" {
+		return
+	}
+
+	client := github.NewClient(nil)
+	rr, resp, err := client.Repositories.GetLatestRelease(context.Background(), "interlynk-io", "sbomgr")
+	if err != nil {
+		panic(err)
+	}
+
+	if resp.StatusCode != 200 {
+		return
+	}
+
+	if rr.GetTagName() != version.GetVersionInfo().GitVersion {
+		fmt.Printf("\nA new version of sbomgr is available %s.\n\n", rr.GetTagName())
+	}
 }
