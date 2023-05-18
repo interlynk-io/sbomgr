@@ -36,6 +36,11 @@ Search for packages with regexp name matching "log4"
 ```sh
 sbomgr packages -EN 'log4' <sbom file or dir>
 ```
+
+Search for packages in air gapped environment for name matching "log4"
+```sh
+export INTERLYNK_DISABLE_VERSION_CHECK=true sbomgr packages -EN 'log4' <sbom file or dir>
+```
 # Features
 - SBOM format agnostic and currently supports searching through SPDX and CycloneDX. 
 - Blazing Fast :rocket:  
