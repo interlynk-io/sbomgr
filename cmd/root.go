@@ -29,9 +29,9 @@ var rootCmd = &cobra.Command{
 	Use:   "sbomgr",
 	Short: "a modern tool to search sboms",
 	Long: `
-sbomgr is a modern tool to search sboms. It is designed to be fast 
+sbomgr is a modern tool to search sboms. It is designed to be fast
 and easy to use. It is a command line tool that can be used to search
-sboms for packages and files. 
+sboms for packages and files.
 	`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
