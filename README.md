@@ -128,6 +128,28 @@ sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
 2.0.88	Microsoft.SBOMTool	chalk                                	2.4.2
 2.0.88	Microsoft.SBOMTool	async-settle                         	1.0.0
 ```
+#### Using containerized sbomgr
+
+```sh
+$docker run [volume-maps] ghcr.io/interlynk-io/sbomgr [command] [options]
+```
+Example
+```sh
+$docker run -v ~/interlynk/sbomlc/:/app/sbomlc ghcr.io/interlynk-io/sbomgr packages -c /app/sbomlc
+```
+```
+Unable to find image 'ghcr.io/interlynk-io/sbomgr:latest' locally
+latest: Pulling from interlynk-io/sbomgr
+479c7812d0ff: Already exists
+5b3064dc8fe2: Already exists
+Digest: sha256:d359b7e6e2b870542500dc00967ca2c5a4e78c8f1658b5c6dbdc8330effe38f8
+Status: Downloaded newer image for ghcr.io/interlynk-io/sbomgr:latest
+
+A new version of sbomgr is available v0.0.6.
+
+Matching file count: 3153
+Matching package count: 716953
+```
 
 # Search flags 
 
