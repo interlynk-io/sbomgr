@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/Masterminds/semver/v3"
 	"github.com/google/go-github/v52/github"
 	"github.com/spf13/cobra"
 	version "sigs.k8s.io/release-utils/version"
@@ -98,7 +99,18 @@ func checkIfLatestRelease() {
 		return
 	}
 
-	if rr.GetTagName() != version.GetVersionInfo().GitVersion {
+	verLatest, err := semver.NewVersion(version.GetVersionInfo().GitVersion)
+	if err != nil {
+		return
+	}
+
+	verInstalled, err := semver.NewVersion(rr.GetTagName())
+	if err != nil {
+		return
+	}
+
+	result := verInstalled.Compare(verLatest)
+	if result < 0 {
 		fmt.Printf("\nA new version of sbomgr is available %s.\n\n", rr.GetTagName())
 	}
 }
