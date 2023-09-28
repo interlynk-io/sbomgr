@@ -9,7 +9,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spdx/tools-golang v0.4.0
 	github.com/spf13/cobra v1.7.0
-	go.uber.org/zap v1.24.0
+	go.uber.org/zap v1.26.0
 	gopkg.in/yaml.v2 v2.4.0
 	sigs.k8s.io/release-utils v0.7.4
 )
@@ -22,13 +22,11 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/spdx/gordf v0.0.0-20201111095634-7098f93598fb // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	go.uber.org/atomic v1.7.0 // indirect
-	go.uber.org/multierr v1.9.0 // indirect
+	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/net v0.9.0 // indirect
 	golang.org/x/oauth2 v0.7.0 // indirect
