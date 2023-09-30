@@ -261,8 +261,21 @@ We look forward to your contributions, below are a few guidelines on how to subm
 - Push your changes (`git push origin feature/new-feature`)
 - Create a new pull-request
 
-# Contact
-We appreciate all feedback, the best way to get in touch with us
-- hello@interlynk.io
-- https://github.com/interlynk-io/sbomgr/issues
-- https://twitter.com/InterlynkIo
+# Other SBOM Open Source tools
+- [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool to compose a single SBOM by combining other (part) SBOMs
+- [SBOM Quality Score](https://github.com/interlynk-io/sbomqs) - A tool for evaluating the quality and completeness of SBOMs
+- [SBOM Search Tool](https://github.com/interlynk-io/sbomagr) - A tool to grep style semantic search in SBOMs
+- [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public repository
+
+# Contact 
+We appreciate all feedback. The best ways to get in touch with us:
+- :phone: [Live Chat](https://www.interlynk.io/#hs-chat-open)
+- 📫 [Email Us](mailto:hello@interlynk.io)
+- 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues) 
+- :x: [Follow us on X](https://twitter.com/InterlynkIo)
+
+# Stargazers
+
+If you like this project, please support us by starring it. 
+
+[![Stargazers](https://starchart.cc/interlynk-io/sbomgr.svg)](https://starchart.cc/interlynk-io/sbomgr)
