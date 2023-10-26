@@ -18,6 +18,8 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/interlynk-io/sbomgr.svg)](https://pkg.go.dev/github.com/interlynk-io/sbomgr)
 [![Go Report Card](https://goreportcard.com/badge/github.com/interlynk-io/sbomgr)](https://goreportcard.com/report/github.com/interlynk-io/sbomgr)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/interlynk-io/sbomgr/badge)](https://securityscorecards.dev/viewer/?uri=github.com/interlynk-io/sbomgr)
+![GitHub all releases](https://img.shields.io/github/downloads/interlynk-io/sbomgr/total)
 
 `sbomgr` is a grep like command line utility to help search the SBOM repository based on criteria like the name, checksum, CPE, and PURL.
 
