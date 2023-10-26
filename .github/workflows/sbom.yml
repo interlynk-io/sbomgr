@@ -1,12 +1,9 @@
 name: Build and Push SBOM to Interlynk
 
 on:
-  push:
-    branches:
-      - main # Adjust to your main branch name
-  pull_request:
-    branches:
-      - main # Adjust to your main branch name
+  release:
+    types:
+      - created
 
 jobs:
   build-sbom:
