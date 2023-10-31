@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/CycloneDX/cyclonedx-go v0.7.2
 	github.com/google/go-github/v52 v52.0.0
-	github.com/google/uuid v1.3.1
+	github.com/google/uuid v1.4.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spdx/tools-golang v0.4.0
 	github.com/spf13/cobra v1.7.0
