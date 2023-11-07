@@ -8,7 +8,7 @@ require (
 	github.com/google/uuid v1.4.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spdx/tools-golang v0.4.0
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 	go.uber.org/zap v1.26.0
 	gopkg.in/yaml.v2 v2.4.0
 	sigs.k8s.io/release-utils v0.7.6
