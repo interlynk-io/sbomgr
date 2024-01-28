@@ -46,9 +46,9 @@ func (doc *cdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 	}
 
 	if doc.doc.Metadata != nil && doc.doc.Metadata.Tools != nil {
-		tools := *doc.doc.Metadata.Tools
-		result.ToolName = tools[0].Name
-		result.ToolVersion = tools[0].Version
+		componentTools := *doc.doc.Metadata.Tools.Components
+		result.ToolName = componentTools[0].Name
+		result.ToolVersion = componentTools[0].Version
 	}
 
 	return result, nil
