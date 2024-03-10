@@ -28,6 +28,10 @@ go install github.com/interlynk-io/sbomgr@latest
 ```
 other installations [options](#installation)
 
+# SBOM Card 
+[![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd
+)](https://app.interlynk.io/customer/products?id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IklqSmtaakkyTkRRMUxXSTBaR0V0TkdJME9TMWhPVFpqTFRBd09UZGtZMlptTWpabU9TST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--6d74d14e40d6676522b1c529d44e4a320f05bcf3d42121e61e1275a1297a3453)
+
 # Basic usage
 Search for packages with exact name matching "abbrev". 
 ```sh
