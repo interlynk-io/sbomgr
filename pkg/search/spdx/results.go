@@ -20,7 +20,7 @@ import (
 	"github.com/interlynk-io/sbomgr/pkg/licenses"
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
 
-	spdx_common "github.com/spdx/tools-golang/spdx/common"
+	spdx_common "github.com/spdx/tools-golang/spdx/v2/common"
 )
 
 func (s *spdxDoc) constructResults(pIndices []int) (*results.Result, error) {

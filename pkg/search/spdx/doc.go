@@ -23,10 +23,10 @@ import (
 	"github.com/interlynk-io/sbomgr/pkg/detect"
 	"github.com/interlynk-io/sbomgr/pkg/search/options"
 	spdx_json "github.com/spdx/tools-golang/json"
-	spdx_rdf "github.com/spdx/tools-golang/rdfloader"
-	spdx_common "github.com/spdx/tools-golang/spdx/common"
-	"github.com/spdx/tools-golang/spdx/v2_3"
-	spdx_tv "github.com/spdx/tools-golang/tvloader"
+	spdx_rdf "github.com/spdx/tools-golang/rdf"
+	spdx_common "github.com/spdx/tools-golang/spdx/v2/common"
+	"github.com/spdx/tools-golang/spdx/v2/v2_3"
+	spdx_tv "github.com/spdx/tools-golang/tagvalue"
 	spdx_yaml "github.com/spdx/tools-golang/yaml"
 )
 
@@ -44,13 +44,13 @@ func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*spdxDoc, 
 
 	switch ro.SbomFileFormat {
 	case detect.FileFormatJSON:
-		d, err = spdx_json.Load2_3(ro.File)
+		d, err = spdx_json.Read(ro.File)
 	case detect.FileFormatTagValue:
-		d, err = spdx_tv.Load2_3(ro.File)
+		d, err = spdx_tv.Read(ro.File)
 	case detect.FileFormatYAML:
-		d, err = spdx_yaml.Load2_3(ro.File)
+		d, err = spdx_yaml.Read(ro.File)
 	case detect.FileFormatRDF:
-		d, err = spdx_rdf.Load2_3(ro.File)
+		d, err = spdx_rdf.Read(ro.File)
 	default:
 		err = fmt.Errorf("unsupported spdx format %s", string(ro.SbomFileFormat))
 	}
