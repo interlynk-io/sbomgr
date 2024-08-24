@@ -14,8 +14,6 @@
 package cdx
 
 import (
-	"fmt"
-
 	cydx "github.com/CycloneDX/cyclonedx-go"
 	"github.com/interlynk-io/sbomgr/pkg/licenses"
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
@@ -47,7 +45,6 @@ func (doc *cdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 		Matched:        len(pIndices) > 0,
 	}
 
-	fmt.Printf("doc.doc.Metadata: %+v\n", doc.doc.Metadata)
 	if doc.doc.Metadata != nil && doc.doc.Metadata.Tools != nil {
 		tools := doc.doc.Metadata.Tools
 		if tools.Tools != nil && len(*tools.Tools) > 0 {
@@ -85,6 +82,15 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 
 		if len(comp.CPE) > 0 {
 			res.CPE = []string{comp.CPE}
+		}
+
+		if comp.ExternalReferences != nil && len(*comp.ExternalReferences) > 0 {
+			for _, er := range *comp.ExternalReferences {
+				if er.Type == cydx.ERTypeVCS {
+					res.Repository = er.URL
+					break
+				}
+			}
 		}
 
 		if comp.Hashes != nil {
