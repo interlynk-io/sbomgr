@@ -22,14 +22,15 @@ type Checksum struct {
 }
 
 type Package struct {
-	Name       string                  `json:"name"`
-	Version    string                  `json:"version"`
+	Name       string                  `json:"name,omitempty"`
+	Version    string                  `json:"version,omitempty"`
 	PURL       string                  `json:"purl,omitempty"`
 	CPE        []string                `json:"cpe,omitempty"`
 	Direct     bool                    `json:"direct,omitempty"`
 	PathToRoot []string                `json:"path_to_root,omitempty"`
 	Licenses   []licenses.LicenseStore `json:"license,omitempty"`
 	Checksums  []Checksum              `json:"checksum,omitempty"`
+	Repository string                  `json:"repository,omitempty"`
 }
 
 type File struct {

@@ -1,12 +1,12 @@
 <!--
  Copyright 2023 Interlynk.io
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
      http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,12 +28,12 @@ go install github.com/interlynk-io/sbomgr@latest
 ```
 other installations [options](#installation)
 
-# SBOM Card 
+# SBOM Card
 [![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd
 )](https://app.interlynk.io/customer/products?id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IklqSmtaakkyTkRRMUxXSTBaR0V0TkdJME9TMWhPVFpqTFRBd09UZGtZMlptTWpabU9TST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--6d74d14e40d6676522b1c529d44e4a320f05bcf3d42121e61e1275a1297a3453)
 
 # Basic usage
-Search for packages with exact name matching "abbrev". 
+Search for packages with exact name matching "abbrev".
 ```sh
 sbomgr packages -N 'abbrev' <sbom file or dir>
 ```
@@ -48,13 +48,13 @@ Search for packages in air gapped environment for name matching "log4"
 export INTERLYNK_DISABLE_VERSION_CHECK=true sbomgr packages -EN 'log4' <sbom file or dir>
 ```
 # Features
-- SBOM format agnostic and currently supports searching through SPDX and CycloneDX. 
-- Blazing Fast :rocket:  
+- SBOM format agnostic and currently supports searching through SPDX and CycloneDX.
+- Blazing Fast :rocket:
 - Output search results as [jsonl](https://jsonlines.org/).
 - Supports RE2 [regular expressions](https://github.com/google/re2/wiki/Syntax)
 
 
-# Use cases 
+# Use cases
 `sbomgr` can answer some of the most common SBOM use cases by searching an SBOM file or SBOM repository.
 
 #### How many SBOM and packages exist in the repository?
@@ -129,7 +129,7 @@ packages_matched: 2
 
 #### extract data using user-defined output
 ```sh
-sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json 
+sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
 2.0.88	Microsoft.SBOMTool	Coordinated Packages                 	229170
 2.0.88	Microsoft.SBOMTool	chalk                                	2.4.2
 2.0.88	Microsoft.SBOMTool	async-settle                         	1.0.0
@@ -157,37 +157,37 @@ Matching file count: 3153
 Matching package count: 716953
 ```
 
-# Search flags 
+# Search flags
 
-## Packages 
+## Packages
 This section explains the flags relevant to the packages search feature.
-The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour. 
+The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour.
 
 #### *Match Criteria*
 ---
 - `-N` or `--name` used for package/component name search.
-- `-C` or `--cpe` used for package/component cpe search. 
-- `-P` or `--purl` used for pacakge/component purl search. 
-- `-H` or `--checksum` used for package/component checksum value search. 
+- `-C` or `--cpe` used for package/component cpe search.
+- `-P` or `--purl` used for pacakge/component purl search.
+- `-H` or `--checksum` used for package/component checksum value search.
 
-all of these match criteria are exclusive to each other. 
+all of these match criteria are exclusive to each other.
 
-#### *Patter Matching*  
+#### *Patter Matching*
 ---------
 - `-E` or `--extended-regexp` flag can be used to indicate if the match criteria is a regular expression. Syntax supported is https://github.com/google/re2/wiki/Syntax.
 
 #### *Matching Control*
 -----
-- `-i` or `--ignore-case` case insensitive matching. 
+- `-i` or `--ignore-case` case insensitive matching.
 
 #### *Output Control*
 ----
-- `-l` or `--license` this includes the license of the package/component in the output. 
-- `-q` or `--quiet` this suppresses all output of the tool, the return value of the tool is 0 indicating success, if it finds the search criteria. 
-- `--no-filename` removes the filename from the output. 
+- `-l` or `--license` this includes the license of the package/component in the output.
+- `-q` or `--quiet` this suppresses all output of the tool, the return value of the tool is 0 indicating success, if it finds the search criteria.
+- `--no-filename` removes the filename from the output.
 - `-j` or `--jsonl` outputs the search results in [jsonl](https://jsonlines.org/).
-- `-p` or `--print-errors` includes errors encoundered during searching. Default is to ignore them. 
-- `-O` or `--output-format` user-defined output format. Options are listed below 
+- `-p` or `--print-errors` includes errors encoundered during searching. Default is to ignore them.
+- `-O` or `--output-format` user-defined output format. Options are listed below
   - `filen` - filepath
   - `tooln` - tool with which sbom was generated, only prints the first one
   - `toolv` - tool version
@@ -195,12 +195,13 @@ all of these match criteria are exclusive to each other.
   - `docv`  - sbom document version
   - `cpe`   - package cpe, only prints the first one, indicates how many cpe's exists.
   - `purl`  - package purl
-  - `pkgn`  - package name 
+  - `pkgn`  - package name
   - `pkgv`  - package version
   - `pkgl`  - package licenses
-  - `specn` - spec of the sbom document, spdx or cdx. 
+  - `specn` - spec of the sbom document, spdx or cdx.
   - `chkn`  - checksum name
-  - `chkv`  - checksum value 
+  - `chkv`  - checksum value
+  - `repo`  - repository url
 
 #### *Stats Control*
 ----
@@ -273,15 +274,15 @@ We look forward to your contributions, below are a few guidelines on how to subm
 - [SBOM Search Tool](https://github.com/interlynk-io/sbomagr) - A tool to grep style semantic search in SBOMs
 - [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public repository
 
-# Contact 
+# Contact
 We appreciate all feedback. The best ways to get in touch with us:
 - :phone: [Live Chat](https://www.interlynk.io/#hs-chat-open)
 - 📫 [Email Us](mailto:hello@interlynk.io)
-- 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues) 
+- 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues)
 - :x: [Follow us on X](https://twitter.com/InterlynkIo)
 
 # Stargazers
 
-If you like this project, please support us by starring it. 
+If you like this project, please support us by starring it.
 
 [![Stargazers](https://starchart.cc/interlynk-io/sbomgr.svg)](https://starchart.cc/interlynk-io/sbomgr)

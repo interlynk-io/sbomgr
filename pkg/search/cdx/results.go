@@ -46,9 +46,20 @@ func (doc *cdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 	}
 
 	if doc.doc.Metadata != nil && doc.doc.Metadata.Tools != nil {
-		tools := *doc.doc.Metadata.Tools.Tools
-		result.ToolName = tools[0].Name
-		result.ToolVersion = tools[0].Version
+		tools := doc.doc.Metadata.Tools
+		if tools.Tools != nil && len(*tools.Tools) > 0 {
+			tool := (*tools.Tools)[0]
+			result.ToolName = tool.Name
+			result.ToolVersion = tool.Version
+		} else if tools.Components != nil && len(*tools.Components) > 0 {
+			tool := (*tools.Components)[0]
+			result.ToolName = tool.Name
+			result.ToolVersion = tool.Version
+		} else if tools.Services != nil && len(*tools.Services) > 0 {
+			tool := (*tools.Services)[0]
+			result.ToolName = tool.Name
+			result.ToolVersion = tool.Version
+		}
 	}
 
 	return result, nil
@@ -71,6 +82,15 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 
 		if len(comp.CPE) > 0 {
 			res.CPE = []string{comp.CPE}
+		}
+
+		if comp.ExternalReferences != nil && len(*comp.ExternalReferences) > 0 {
+			for _, er := range *comp.ExternalReferences {
+				if er.Type == cydx.ERTypeVCS {
+					res.Repository = er.URL
+					break
+				}
+			}
 		}
 
 		if comp.Hashes != nil {

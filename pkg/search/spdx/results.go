@@ -57,8 +57,9 @@ func (s *spdxDoc) pkgResults(indices []int) []results.Package {
 	pkgs := make([]results.Package, len(indices))
 	for i, idx := range indices {
 		pkgs[i] = results.Package{
-			Name:    s.doc.Packages[idx].PackageName,
-			Version: s.doc.Packages[idx].PackageVersion,
+			Name:       s.doc.Packages[idx].PackageName,
+			Version:    s.doc.Packages[idx].PackageVersion,
+			Repository: s.doc.Packages[idx].PackageDownloadLocation,
 		}
 
 		purls := s.Purl(idx)

@@ -38,6 +38,7 @@ var OutputFormatOptions = map[string]bool{
 	"specn": true, //spec name
 	"chkn":  true, //checksum name
 	"chkv":  true, //checksum version
+	"repo":  true, //repository
 }
 
 func outputQuiet(r *results.Result, nr *SearchParams) (int, error) {
@@ -64,6 +65,35 @@ func outputJsonl(r *results.Result, nr *SearchParams) (int, error) {
 	if len(r.Packages) == 0 {
 		return matchedPkgCount, fmt.Errorf("no match found")
 	}
+
+	newPackages := []results.Package{}
+
+	for _, p := range r.Packages {
+		newP := results.Package{}
+		for _, f := range nr.Formats {
+			switch f {
+			case "cpe":
+				newP.CPE = p.CPE
+			case "purl":
+				newP.PURL = p.PURL
+			case "pkgn":
+				newP.Name = p.Name
+			case "pkgv":
+				newP.Version = p.Version
+			case "pkgl":
+				newP.Licenses = p.Licenses
+			case "chkn":
+				newP.Checksums = p.Checksums
+			case "chkv":
+				newP.Checksums = p.Checksums
+			case "repo":
+				newP.Repository = p.Repository
+			}
+		}
+		newPackages = append(newPackages, newP)
+	}
+
+	r.Packages = newPackages
 
 	b, err := json.Marshal(r)
 	if err != nil {
@@ -269,6 +299,12 @@ func customOutput(idx int, chkIdx int, r *results.Result, nr *SearchParams) []st
 				p = append(p, pkg.Checksums[chkIdx].Value)
 			} else {
 				p = append(p, "[NOCHKV]")
+			}
+		case "repo":
+			if chkIdx >= 0 {
+				p = append(p, pkg.Repository)
+			} else {
+				p = append(p, "[NOREPO]")
 			}
 		}
 	}
