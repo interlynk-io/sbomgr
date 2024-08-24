@@ -14,6 +14,8 @@
 package cdx
 
 import (
+	"fmt"
+
 	cydx "github.com/CycloneDX/cyclonedx-go"
 	"github.com/interlynk-io/sbomgr/pkg/licenses"
 	"github.com/interlynk-io/sbomgr/pkg/search/results"
@@ -45,10 +47,22 @@ func (doc *cdxDoc) constructResults(pIndices []int) (*results.Result, error) {
 		Matched:        len(pIndices) > 0,
 	}
 
+	fmt.Printf("doc.doc.Metadata: %+v\n", doc.doc.Metadata)
 	if doc.doc.Metadata != nil && doc.doc.Metadata.Tools != nil {
-		tools := *doc.doc.Metadata.Tools.Tools
-		result.ToolName = tools[0].Name
-		result.ToolVersion = tools[0].Version
+		tools := doc.doc.Metadata.Tools
+		if tools.Tools != nil && len(*tools.Tools) > 0 {
+			tool := (*tools.Tools)[0]
+			result.ToolName = tool.Name
+			result.ToolVersion = tool.Version
+		} else if tools.Components != nil && len(*tools.Components) > 0 {
+			tool := (*tools.Components)[0]
+			result.ToolName = tool.Name
+			result.ToolVersion = tool.Version
+		} else if tools.Services != nil && len(*tools.Services) > 0 {
+			tool := (*tools.Services)[0]
+			result.ToolName = tool.Name
+			result.ToolVersion = tool.Version
+		}
 	}
 
 	return result, nil
