@@ -61,7 +61,7 @@ test: generate
 
 .PHONY: build
 build:
-	CGO_ENABLED=0 go build -trimpath -ldflags "$(LDFLAGS)" -o $(BUILD_DIR)/sbomgr main.go
+	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath -ldflags "$(LDFLAGS)" -o $(BUILD_DIR)/sbomgr main.go
 
 .PHONY: clean
 clean:
