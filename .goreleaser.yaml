@@ -31,6 +31,26 @@ builds:
     env: 
       - CGO_ENABLED=0
 
+nfpms:
+  - id: sbomgr
+    package_name: sbomgr
+    file_name_template: "{{ .ConventionalFileName }}"
+    vendor: Interlynk
+    homepage: https://interlynk.io
+    maintainer: Interlynk Authors hello@interlynk.io
+    builds:
+      - binaries
+    description: SBOM Grep - search through SBOMs
+    license: "Apache License 2.0"
+    formats:
+      - apk
+      - deb
+      - rpm
+    contents:
+      - src: /usr/bin/sbomgr-{{ .Os }}-{{ .Arch }}
+        dst: /usr/bin/sbomgr
+        type: "symlink"
+
 archives:
 - format: binary
   name_template: "{{ .Binary }}"
