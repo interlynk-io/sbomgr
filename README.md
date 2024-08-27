@@ -26,50 +26,62 @@
 ```sh
 go install github.com/interlynk-io/sbomgr@latest
 ```
+
 other installations [options](#installation)
 
 # SBOM Card
-[![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd
-)](https://app.interlynk.io/customer/products?id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IklqSmtaakkyTkRRMUxXSTBaR0V0TkdJME9TMWhPVFpqTFRBd09UZGtZMlptTWpabU9TST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--6d74d14e40d6676522b1c529d44e4a320f05bcf3d42121e61e1275a1297a3453)
+
+[![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd)](https://app.interlynk.io/customer/products?id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IklqSmtaakkyTkRRMUxXSTBaR0V0TkdJME9TMWhPVFpqTFRBd09UZGtZMlptTWpabU9TST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--6d74d14e40d6676522b1c529d44e4a320f05bcf3d42121e61e1275a1297a3453)
 
 # Basic usage
+
 Search for packages with exact name matching "abbrev".
+
 ```sh
 sbomgr packages -N 'abbrev' <sbom file or dir>
 ```
 
 Search for packages with regexp name matching "log4"
+
 ```sh
 sbomgr packages -EN 'log4' <sbom file or dir>
 ```
 
 Search for packages in air gapped environment for name matching "log4"
+
 ```sh
 export INTERLYNK_DISABLE_VERSION_CHECK=true sbomgr packages -EN 'log4' <sbom file or dir>
 ```
+
 # Features
+
 - SBOM format agnostic and currently supports searching through SPDX and CycloneDX.
 - Blazing Fast :rocket:
 - Output search results as [jsonl](https://jsonlines.org/).
 - Supports RE2 [regular expressions](https://github.com/google/re2/wiki/Syntax)
 
-
 # Use cases
+
 `sbomgr` can answer some of the most common SBOM use cases by searching an SBOM file or SBOM repository.
 
 #### How many SBOM and packages exist in the repository?
+
 ```sh
 ➜ sbomgr packages -c ~/data/sbom-repo/docker-images
 sbom_files_matched: 86
 packages_matched: 33556
 ```
+
 #### Are there packages with `zlib` in the name?
+
 ```sh
 ➜ sbomgr packages -cEN 'zlib' ~/data/sbom-repo/docker-images
 sbom_files_matched: 71
 packages_matched: 145
 ```
+
 #### Are there packages with a given checksum?
+
 ```sh
 ➜ sbomgr packages -c -H '5c260231de4f62ee26888776190b4c3fda6cbe14' ~/data/sbom-repo/docker-images
 sbom_files_matched: 2
@@ -77,6 +89,7 @@ packages_matched: 2
 ```
 
 #### Create a json report of packages with .zip files
+
 ```sh
 ➜ sbomgr packages -jrE -N '\.zip$' ~/data/ | jq .
 {
@@ -96,6 +109,7 @@ packages_matched: 2
 ```
 
 #### Create a json report of all licenses included in an sbom
+
 ```sh
 ➜ sbomgr packages -jl ~/data/some-sboms/julia.spdx | jq .
 {
@@ -116,8 +130,8 @@ packages_matched: 2
     },
 ```
 
-
 #### During CI check if a malicious package is present??
+
 ```sh
 ➜  sbomgr packages -qN 'abbrev' ~/tmp/app.spdx.json
 ➜  echo $?
@@ -128,21 +142,26 @@ packages_matched: 2
 ```
 
 #### extract data using user-defined output
+
 ```sh
 sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
 2.0.88	Microsoft.SBOMTool	Coordinated Packages                 	229170
 2.0.88	Microsoft.SBOMTool	chalk                                	2.4.2
 2.0.88	Microsoft.SBOMTool	async-settle                         	1.0.0
 ```
+
 #### Using containerized sbomgr
 
 ```sh
 $docker run [volume-maps] ghcr.io/interlynk-io/sbomgr [command] [options]
 ```
+
 Example
+
 ```sh
 $docker run -v ~/interlynk/sbomlc/:/app/sbomlc ghcr.io/interlynk-io/sbomgr packages -c /app/sbomlc
 ```
+
 ```
 Unable to find image 'ghcr.io/interlynk-io/sbomgr:latest' locally
 latest: Pulling from interlynk-io/sbomgr
@@ -160,11 +179,14 @@ Matching package count: 716953
 # Search flags
 
 ## Packages
+
 This section explains the flags relevant to the packages search feature.
 The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour.
 
-#### *Match Criteria*
+#### _Match Criteria_
+
 ---
+
 - `-N` or `--name` used for package/component name search.
 - `-C` or `--cpe` used for package/component cpe search.
 - `-P` or `--purl` used for pacakge/component purl search.
@@ -172,16 +194,22 @@ The packages search takes only a single argument, either a file or a directory. 
 
 all of these match criteria are exclusive to each other.
 
-#### *Patter Matching*
----------
+#### _Patter Matching_
+
+---
+
 - `-E` or `--extended-regexp` flag can be used to indicate if the match criteria is a regular expression. Syntax supported is https://github.com/google/re2/wiki/Syntax.
 
-#### *Matching Control*
------
+#### _Matching Control_
+
+---
+
 - `-i` or `--ignore-case` case insensitive matching.
 
-#### *Output Control*
-----
+#### _Output Control_
+
+---
+
 - `-l` or `--license` this includes the license of the package/component in the output.
 - `-q` or `--quiet` this suppresses all output of the tool, the return value of the tool is 0 indicating success, if it finds the search criteria.
 - `--no-filename` removes the filename from the output.
@@ -191,32 +219,40 @@ all of these match criteria are exclusive to each other.
   - `filen` - filepath
   - `tooln` - tool with which sbom was generated, only prints the first one
   - `toolv` - tool version
-  - `docn`  - sbom document name
-  - `docv`  - sbom document version
-  - `cpe`   - package cpe, only prints the first one, indicates how many cpe's exists.
-  - `purl`  - package purl
-  - `pkgn`  - package name
-  - `pkgv`  - package version
-  - `pkgl`  - package licenses
+  - `docn` - sbom document name
+  - `docv` - sbom document version
+  - `cpe` - package cpe, only prints the first one, indicates how many cpe's exists.
+  - `purl` - package purl
+  - `pkgn` - package name
+  - `pkgv` - package version
+  - `pkgl` - package licenses
   - `specn` - spec of the sbom document, spdx or cdx.
-  - `chkn`  - checksum name
-  - `chkv`  - checksum value
-  - `repo`  - repository url
+  - `chkn` - checksum name
+  - `chkv` - checksum value
+  - `repo` - repository url
+  - `direct` - package is a direct dependency
 
-#### *Stats Control*
-----
+#### _Stats Control_
+
+---
+
 - `-c` or `--count` suppresses the normal output and print matching counts of sbom filenames and packages.
 
-#### *Directory Control*
-----
+#### _Directory Control_
+
+---
+
 - `-r` or `--recurse` when set, recursively scans all sub directories.
 
-#### *Spec Control*
-----
+#### _Spec Control_
+
+---
+
 - `--spdx` searches only files which are SPDX.
 - `--cdx` searches only files which are CycloneDX.
 
 # Future work
+
 - Search using files.
 - Search using tool metadata.
 - Search using CVE-ID.
@@ -225,6 +261,7 @@ all of these match criteria are exclusive to each other.
 - Provide a list of malicious packages
 
 # SBOM Samples
+
 - A sample set of SBOM is present in the [samples](https://github.com/interlynk-io/sbomgr/tree/main/samples) directory above.
 - [SBOM Benchmark](https://www.sbombenchmark.dev) is a repository of SBOM and quality score for most popular containers and repositories
 - [SBOM Explorer](https://github.com/interlynk-io/sbomex) is a command line utility to search and pull SBOMs
@@ -238,6 +275,7 @@ https://github.com/interlynk-io/sbomgr/releases
 ```
 
 ## Using Homebrew
+
 ```console
 brew tap interlynk-io/interlynk
 brew install sbomgr
@@ -258,8 +296,8 @@ This approach involves cloning the repo and building it.
 3. make build
 4. To test if the build was successful run the following command `./build/sbomgr version`
 
-
 # Contributions
+
 We look forward to your contributions, below are a few guidelines on how to submit them
 
 - Fork the repo
@@ -269,13 +307,16 @@ We look forward to your contributions, below are a few guidelines on how to subm
 - Create a new pull-request
 
 # Other SBOM Open Source tools
+
 - [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool to compose a single SBOM by combining other (part) SBOMs
 - [SBOM Quality Score](https://github.com/interlynk-io/sbomqs) - A tool for evaluating the quality and completeness of SBOMs
 - [SBOM Search Tool](https://github.com/interlynk-io/sbomagr) - A tool to grep style semantic search in SBOMs
 - [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public repository
 
 # Contact
+
 We appreciate all feedback. The best ways to get in touch with us:
+
 - :phone: [Live Chat](https://www.interlynk.io/#hs-chat-open)
 - 📫 [Email Us](mailto:hello@interlynk.io)
 - 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues)

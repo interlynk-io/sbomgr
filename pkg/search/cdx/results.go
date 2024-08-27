@@ -93,6 +93,12 @@ func (doc *cdxDoc) pkgResults(pIndices []int) []results.Package {
 			}
 		}
 
+		if doc.directComps != nil {
+			if _, ok := doc.directComps[comp.BOMRef]; ok {
+				res.Direct = true
+			}
+		}
+
 		if comp.Hashes != nil {
 			for _, c := range *comp.Hashes {
 				res.Checksums = append(res.Checksums, results.Checksum{
