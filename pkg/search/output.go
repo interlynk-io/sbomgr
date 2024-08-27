@@ -25,20 +25,21 @@ import (
 )
 
 var OutputFormatOptions = map[string]bool{
-	"filen": true, //filename
-	"tooln": true, //toolname
-	"toolv": true, //toolversion
-	"docn":  true, //doc name
-	"docv":  true, //doc version
-	"cpe":   true, //cpe
-	"purl":  true, //purl
-	"pkgn":  true, //component name
-	"pkgv":  true, //component version
-	"pkgl":  true, //component license
-	"specn": true, //spec name
-	"chkn":  true, //checksum name
-	"chkv":  true, //checksum version
-	"repo":  true, //repository
+	"filen":  true, //filename
+	"tooln":  true, //toolname
+	"toolv":  true, //toolversion
+	"docn":   true, //doc name
+	"docv":   true, //doc version
+	"cpe":    true, //cpe
+	"purl":   true, //purl
+	"pkgn":   true, //component name
+	"pkgv":   true, //component version
+	"pkgl":   true, //component license
+	"specn":  true, //spec name
+	"chkn":   true, //checksum name
+	"chkv":   true, //checksum version
+	"repo":   true, //repository
+	"direct": true, //direct
 }
 
 func outputQuiet(r *results.Result, nr *SearchParams) (int, error) {
@@ -88,6 +89,8 @@ func outputJsonl(r *results.Result, nr *SearchParams) (int, error) {
 				newP.Checksums = p.Checksums
 			case "repo":
 				newP.Repository = p.Repository
+			case "direct":
+				newP.Direct = p.Direct
 			}
 		}
 		newPackages = append(newPackages, newP)
@@ -301,10 +304,16 @@ func customOutput(idx int, chkIdx int, r *results.Result, nr *SearchParams) []st
 				p = append(p, "[NOCHKV]")
 			}
 		case "repo":
-			if chkIdx >= 0 {
+			if len(pkg.Repository) > 0 {
 				p = append(p, pkg.Repository)
 			} else {
 				p = append(p, "[NOREPO]")
+			}
+		case "direct":
+			if pkg.Direct {
+				p = append(p, "Direct")
+			} else {
+				p = append(p, "[INDIRECT]")
 			}
 		}
 	}

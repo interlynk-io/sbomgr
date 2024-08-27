@@ -72,6 +72,12 @@ func (s *spdxDoc) pkgResults(indices []int) []results.Package {
 			pkgs[i].CPE = cpes
 		}
 
+		if s.directPkgs != nil {
+			if _, ok := s.directPkgs[string(s.doc.Packages[idx].PackageSPDXIdentifier)]; ok {
+				pkgs[i].Direct = true
+			}
+		}
+
 		for _, c := range s.doc.Packages[idx].PackageChecksums {
 			pkgs[i].Checksums = append(pkgs[i].Checksums, results.Checksum{
 				Algorithm: string(c.Algorithm),

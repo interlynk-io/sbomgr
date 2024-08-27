@@ -31,9 +31,10 @@ import (
 )
 
 type spdxDoc struct {
-	doc  *v2_3.Document
-	ro   *options.RuntimeOptions
-	opts options.SearchOptions
+	doc        *v2_3.Document
+	ro         *options.RuntimeOptions
+	opts       options.SearchOptions
+	directPkgs map[string]bool
 }
 
 func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*spdxDoc, error) {
@@ -60,12 +61,67 @@ func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*spdxDoc, 
 	}
 
 	doc := &spdxDoc{
-		doc:  d,
-		ro:   ro,
-		opts: opts,
+		doc:        d,
+		ro:         ro,
+		opts:       opts,
+		directPkgs: extractDirectPkgs(d),
 	}
 
 	return doc, nil
+}
+
+func extractDirectPkgs(doc *v2_3.Document) map[string]bool {
+	directPkgs := map[string]bool{}
+
+	primaryID := findPrimaryComponent(doc)
+	if primaryID == "" {
+		return directPkgs
+	}
+
+	for _, r := range doc.Relationships {
+		if strings.ToUpper(r.Relationship) == spdx_common.TypeRelationshipDependsOn {
+			if string(r.RefA.ElementRefID) == primaryID {
+				directPkgs[string(r.RefB.ElementRefID)] = true
+			}
+		}
+
+		if strings.ToUpper(r.Relationship) == spdx_common.TypeRelationshipDependencyOf {
+			if string(r.RefB.ElementRefID) == primaryID {
+				directPkgs[string(r.RefA.ElementRefID)] = true
+			}
+		}
+
+		if strings.ToUpper(r.Relationship) == spdx_common.TypeRelationshipContains {
+			if string(r.RefA.ElementRefID) == primaryID {
+				directPkgs[string(r.RefB.ElementRefID)] = true
+			}
+		}
+
+		if strings.ToUpper(r.Relationship) == spdx_common.TypeRelationshipContainedBy {
+			if string(r.RefB.ElementRefID) == primaryID {
+				directPkgs[string(r.RefA.ElementRefID)] = true
+			}
+		}
+	}
+	return directPkgs
+}
+
+func findPrimaryComponent(doc *v2_3.Document) string {
+	pkgIDs := make(map[string]bool)
+
+	for _, pkg := range doc.Packages {
+		pkgIDs[string(pkg.PackageSPDXIdentifier)] = true
+	}
+
+	for _, r := range doc.Relationships {
+		if strings.ToUpper(r.Relationship) == spdx_common.TypeRelationshipDescribe {
+			_, ok := pkgIDs[string(r.RefB.ElementRefID)]
+			if ok {
+				return string(r.RefB.ElementRefID)
+			}
+		}
+	}
+	return ""
 }
 
 func (d *spdxDoc) searchPackages() []int {
