@@ -26,10 +26,11 @@ import (
 )
 
 type cdxDoc struct {
-	doc      *cydx.BOM
-	ro       *options.RuntimeOptions
-	opts     options.SearchOptions
-	allComps []*cydx.Component
+	doc         *cydx.BOM
+	ro          *options.RuntimeOptions
+	opts        options.SearchOptions
+	allComps    []*cydx.Component
+	directComps map[string]bool
 }
 
 func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*cdxDoc, error) {
@@ -54,10 +55,11 @@ func loadDoc(ro *options.RuntimeOptions, opts options.SearchOptions) (*cdxDoc, e
 	}
 
 	doc := &cdxDoc{
-		doc:      bom,
-		ro:       ro,
-		opts:     opts,
-		allComps: extractAllComponents(bom),
+		doc:         bom,
+		ro:          ro,
+		opts:        opts,
+		allComps:    extractAllComponents(bom),
+		directComps: directComps(bom),
 	}
 	return doc, nil
 }
@@ -79,6 +81,34 @@ func extractAllComponents(bom *cydx.BOM) []*cydx.Component {
 		all_comps = append(all_comps, v)
 	}
 	return all_comps
+}
+
+func directComps(bom *cydx.BOM) map[string]bool {
+	directComps := map[string]bool{}
+
+	if bom.Dependencies == nil {
+		return directComps
+	}
+
+	if bom.Metadata == nil {
+		return directComps
+	}
+
+	if bom.Metadata.Component == nil {
+		return directComps
+	}
+
+	priRef := bom.Metadata.Component.BOMRef
+
+	for _, dep := range *bom.Dependencies {
+		if dep.Ref == priRef {
+			for _, depComps := range *dep.Dependencies {
+				directComps[depComps] = true
+			}
+			break
+		}
+	}
+	return directComps
 }
 
 func walkComponents(comps *[]cydx.Component, store map[string]*cydx.Component) {
