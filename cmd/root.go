@@ -15,14 +15,9 @@
 package cmd
 
 import (
-	"context"
-	"fmt"
 	"os"
 
-	"github.com/Masterminds/semver/v3"
-	"github.com/google/go-github/v52/github"
 	"github.com/spf13/cobra"
-	version "sigs.k8s.io/release-utils/version"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -42,7 +37,6 @@ sboms for packages and files.
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	checkIfLatestRelease()
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
@@ -50,67 +44,36 @@ func Execute() {
 }
 
 func init() {
-	//Pattern
+	// Pattern
 	rootCmd.PersistentFlags().BoolP("extended-regexp", "E", false, "intrepret filters as regular expressions, https://github.com/google/re2/wiki/Syntax")
 
-	//Matching Control
+	// Matching Control
 	rootCmd.PersistentFlags().BoolP("ignore-case", "i", false, "ignore case distinctions in filters, lowers the package/file criterias")
 	rootCmd.PersistentFlags().BoolP("direct-deps", "d", false, "search direct dependencies only, default is to search all packages/files")
 	rootCmd.PersistentFlags().MarkHidden("direct-deps")
 
-	//Output Control
+	// Output Control
 	rootCmd.PersistentFlags().BoolP("license", "l", false, "output with licenses")
 	rootCmd.PersistentFlags().BoolP("quiet", "q", false, "suppress normal output, exits with 0 if match found")
 	rootCmd.PersistentFlags().BoolP("no-filename", "", false, "output with no filename")
 	rootCmd.PersistentFlags().BoolP("jsonl", "j", false, "results in json-lines format https://jsonlines.org/")
 	rootCmd.PersistentFlags().BoolP("print-errors", "p", false, "include errors in output")
 
-	//stats Control
+	// stats Control
 	rootCmd.PersistentFlags().BoolP("count", "c", false, "suppress normal output, print count of matching packages with pattern")
 	rootCmd.PersistentFlags().BoolP("stats", "s", false, "suppress normal output, print stats of matching packages/files")
 	rootCmd.MarkFlagsMutuallyExclusive("count", "stats")
 	rootCmd.PersistentFlags().MarkHidden("stats")
 
-	//Directory Control
+	// Directory Control
 	rootCmd.PersistentFlags().BoolP("recurse", "r", false, "recurse into subdirectories")
 
-	//Spec Control
+	// Spec Control
 	rootCmd.PersistentFlags().BoolP("spdx", "", false, "limit searches to spdx sboms")
 	rootCmd.PersistentFlags().BoolP("cdx", "", false, "limit searches to cdx sboms")
 	rootCmd.MarkFlagsMutuallyExclusive("spdx", "cdx")
 
-	//Resource Control
+	// Resource Control
 	rootCmd.PersistentFlags().IntP("cpus", "", 0, "restrict number of cpus, default is all")
 	rootCmd.PersistentFlags().MarkHidden("cpus")
-}
-
-func checkIfLatestRelease() {
-	if os.Getenv("INTERLYNK_DISABLE_VERSION_CHECK") != "" {
-		return
-	}
-
-	client := github.NewClient(nil)
-	rr, resp, err := client.Repositories.GetLatestRelease(context.Background(), "interlynk-io", "sbomgr")
-	if err != nil {
-		panic(err)
-	}
-
-	if resp.StatusCode != 200 {
-		return
-	}
-
-	verLatest, err := semver.NewVersion(version.GetVersionInfo().GitVersion)
-	if err != nil {
-		return
-	}
-
-	verInstalled, err := semver.NewVersion(rr.GetTagName())
-	if err != nil {
-		return
-	}
-
-	result := verInstalled.Compare(verLatest)
-	if result < 0 {
-		fmt.Printf("\nA new version of sbomgr is available %s.\n\n", rr.GetTagName())
-	}
 }
