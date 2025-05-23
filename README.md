@@ -29,9 +29,9 @@ go install github.com/interlynk-io/sbomgr@latest
 
 other installations [options](#installation)
 
-# SBOM Platform - Free Tier
+# SBOM Platform - Free Community Tier
 
-Our SBOM Automation Platform has a new free tier that provides a comprehensive solution to manage SBOMs (Software Bill of Materials) effortlessly. From centralized SBOM storage, built-in SBOM editor, continuous vulnerability mapping and assessment, and support for organizational policies, all while ensuring compliance and enhancing software supply chain security using integrated SBOM quality scores. The free tier is ideal for small teams. [Sign up](https://app.interlynk.io/)
+Our SBOM Automation Platform has a free community tier that provides a comprehensive solution to manage SBOMs (Software Bill of Materials) effortlessly. From centralized SBOM storage, built-in SBOM editor, continuous vulnerability mapping and assessment, and support for organizational policies, all while ensuring compliance and enhancing software supply chain security using integrated SBOM quality scores. The community tier is ideal for small teams. Learn more [here](https://www.interlynk.io/community-tier) or [Sign up](https://app.interlynk.io/auth)
 
 # SBOM Card
 
@@ -68,7 +68,7 @@ export INTERLYNK_DISABLE_VERSION_CHECK=true sbomgr packages -EN 'log4' <sbom fil
 
 `sbomgr` can answer some of the most common SBOM use cases by searching an SBOM file or SBOM repository.
 
-#### How many SBOM and packages exist in the repository?
+## How many SBOM and packages exist in the repository?
 
 ```sh
 ➜ sbomgr packages -c ~/data/sbom-repo/docker-images
@@ -76,7 +76,7 @@ sbom_files_matched: 86
 packages_matched: 33556
 ```
 
-#### Are there packages with `zlib` in the name?
+## Are there packages with `zlib` in the name?
 
 ```sh
 ➜ sbomgr packages -cEN 'zlib' ~/data/sbom-repo/docker-images
@@ -84,7 +84,7 @@ sbom_files_matched: 71
 packages_matched: 145
 ```
 
-#### Are there packages with a given checksum?
+## Are there packages with a given checksum?
 
 ```sh
 ➜ sbomgr packages -c -H '5c260231de4f62ee26888776190b4c3fda6cbe14' ~/data/sbom-repo/docker-images
@@ -92,7 +92,7 @@ sbom_files_matched: 2
 packages_matched: 2
 ```
 
-#### Create a json report of packages with .zip files
+## Create a json report of packages with .zip files
 
 ```sh
 ➜ sbomgr packages -jrE -N '\.zip$' ~/data/ | jq .
@@ -112,7 +112,7 @@ packages_matched: 2
 }
 ```
 
-#### Create a json report of all licenses included in an sbom
+## Create a json report of all licenses included in an sbom
 
 ```sh
 ➜ sbomgr packages -jl ~/data/some-sboms/julia.spdx | jq .
@@ -134,7 +134,7 @@ packages_matched: 2
     },
 ```
 
-#### During CI check if a malicious package is present??
+## During CI check if a malicious package is present??
 
 ```sh
 ➜  sbomgr packages -qN 'abbrev' ~/tmp/app.spdx.json
@@ -145,7 +145,7 @@ packages_matched: 2
 1
 ```
 
-#### extract data using user-defined output
+## extract data using user-defined output
 
 ```sh
 sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
@@ -154,7 +154,7 @@ sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
 2.0.88	Microsoft.SBOMTool	async-settle                         	1.0.0
 ```
 
-#### Using containerized sbomgr
+## Using containerized sbomgr
 
 ```sh
 $docker run [volume-maps] ghcr.io/interlynk-io/sbomgr [command] [options]
@@ -187,7 +187,7 @@ Matching package count: 716953
 This section explains the flags relevant to the packages search feature.
 The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour.
 
-#### _Match Criteria_
+## _Match Criteria_
 
 ---
 
@@ -198,19 +198,19 @@ The packages search takes only a single argument, either a file or a directory. 
 
 all of these match criteria are exclusive to each other.
 
-#### _Patter Matching_
+## _Patter Matching_
 
 ---
 
 - `-E` or `--extended-regexp` flag can be used to indicate if the match criteria is a regular expression. Syntax supported is https://github.com/google/re2/wiki/Syntax.
 
-#### _Matching Control_
+## _Matching Control_
 
 ---
 
 - `-i` or `--ignore-case` case insensitive matching.
 
-#### _Output Control_
+## _Output Control_
 
 ---
 
@@ -236,19 +236,19 @@ all of these match criteria are exclusive to each other.
   - `repo` - repository url
   - `direct` - package is a direct dependency
 
-#### _Stats Control_
+## _Stats Control_
 
 ---
 
 - `-c` or `--count` suppresses the normal output and print matching counts of sbom filenames and packages.
 
-#### _Directory Control_
+## _Directory Control_
 
 ---
 
 - `-r` or `--recurse` when set, recursively scans all sub directories.
 
-#### _Spec Control_
+## _Spec Control_
 
 ---
 
@@ -312,11 +312,10 @@ We look forward to your contributions, below are a few guidelines on how to subm
 
 # Other SBOM Open Source tools
 
-- [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool to compose a single SBOM by combining other (part) SBOMs
-- [Automated SBOM Transfer](https://github.com/interlynk-io/sbommv) - A primary tool to transfer SBOM's between different systems.
-- [SBOM Quality Score](https://github.com/interlynk-io/sbomqs) - A tool for evaluating the quality and completeness of SBOMs
-- [SBOM Search Tool](https://github.com/interlynk-io/sbomgr) - A tool to grep style semantic search in SBOMs
-- [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public repository
+- [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool for conditional edits and merging of SBOMs
+- [SBOM Seamless Transfer](https://github.com/interlynk-io/sbommv) - A primary tool to transfer SBOM's between different systems.
+- [SBOM Quality Score](https://github.com/interlynk-io/sbomqs) - A tool for evaluating the quality and compliance of SBOMs
+- [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public SBOM repository
 - [SBOM Benchmark](https://www.sbombenchmark.dev) is a repository of SBOM and quality score for most popular containers and repositories
 
 # Contact
