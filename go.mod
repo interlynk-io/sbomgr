@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.23.1
 
 require (
-	github.com/CycloneDX/cyclonedx-go v0.9.2
+	github.com/CycloneDX/cyclonedx-go v0.9.3
 	github.com/google/uuid v1.6.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spdx/tools-golang v0.5.5
