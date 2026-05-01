@@ -29,15 +29,13 @@ go install github.com/interlynk-io/sbomgr@latest
 
 other installations [options](#installation)
 
-# SBOM Platform - Free Community Tier
+## Interlynk Free Tier — Full SBOM Compliance, Zero Friction
 
-Our SBOM Automation Platform has a free community tier that provides a comprehensive solution to manage SBOMs (Software Bill of Materials) effortlessly. From centralized SBOM storage, built-in SBOM editor, continuous vulnerability mapping and assessment, and support for organizational policies, all while ensuring compliance and enhancing software supply chain security using integrated SBOM quality scores. The community tier is ideal for small teams. Learn more [here](https://www.interlynk.io/community-tier) or [Sign up](https://app.interlynk.io/auth)
+Get started with SBOM compliance in under two minutes — no credit card, no time limit. Interlynk's free plan includes a guided setup where you pick your compliance standard (CRA/EU, FDA Cybersecurity, NTIA, or Telecom), upload your SBOM, and instantly see your compliance score with actionable gaps highlighted. You get compliance scoring against one standard, up to 5 products with 5 versions each, unlimited users, built-in vulnerability detection, API access for CI/CD integration, weekly compliance digests, and ShareLynk — a public link to share your compliance posture with customers and partners. Everything beyond the free tier is visible with a clear upgrade path, and you can start a 15-day Enterprise trial anytime to unlock unlimited products, SBOM automation, RBAC, analytics, license management, and workflow integrations. [**Get Started Free →**](https://app.interlynk.io)
 
-# SBOM Card
+📊 **Check your SBOM compliance instantly** directly from your browser in just one click: <https://demo.interlynk.io/>
 
-[![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd)](https://app.interlynk.io/customer/products?id=e8e2ba0c-3d04-4a2e-9b37-dca774bd08bd&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IklqSmtaakkyTkRRMUxXSTBaR0V0TkdJME9TMWhPVFpqTFRBd09UZGtZMlptTWpabU9TST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--6d74d14e40d6676522b1c529d44e4a320f05bcf3d42121e61e1275a1297a3453)
-
-# Basic usage
+## Basic usage
 
 Search for packages with exact name matching "abbrev".
 
@@ -57,14 +55,14 @@ Search for packages in air gapped environment for name matching "log4"
 export INTERLYNK_DISABLE_VERSION_CHECK=true sbomgr packages -EN 'log4' <sbom file or dir>
 ```
 
-# Features
+## Features
 
 - SBOM format agnostic and currently supports searching through SPDX and CycloneDX.
 - Blazing Fast :rocket:
 - Output search results as [jsonl](https://jsonlines.org/).
 - Supports RE2 [regular expressions](https://github.com/google/re2/wiki/Syntax)
 
-# Use cases
+## Use cases
 
 `sbomgr` can answer some of the most common SBOM use cases by searching an SBOM file or SBOM repository.
 
@@ -76,7 +74,7 @@ sbom_files_matched: 86
 packages_matched: 33556
 ```
 
-## Are there packages with `zlib` in the name?
+### Are there packages with `zlib` in the name?
 
 ```sh
 ➜ sbomgr packages -cEN 'zlib' ~/data/sbom-repo/docker-images
@@ -84,7 +82,7 @@ sbom_files_matched: 71
 packages_matched: 145
 ```
 
-## Are there packages with a given checksum?
+### Are there packages with a given checksum?
 
 ```sh
 ➜ sbomgr packages -c -H '5c260231de4f62ee26888776190b4c3fda6cbe14' ~/data/sbom-repo/docker-images
@@ -92,7 +90,7 @@ sbom_files_matched: 2
 packages_matched: 2
 ```
 
-## Create a json report of packages with .zip files
+### Create a json report of packages with .zip files
 
 ```sh
 ➜ sbomgr packages -jrE -N '\.zip$' ~/data/ | jq .
@@ -112,7 +110,7 @@ packages_matched: 2
 }
 ```
 
-## Create a json report of all licenses included in an sbom
+### Create a json report of all licenses included in an sbom
 
 ```sh
 ➜ sbomgr packages -jl ~/data/some-sboms/julia.spdx | jq .
@@ -134,7 +132,7 @@ packages_matched: 2
     },
 ```
 
-## During CI check if a malicious package is present??
+### During CI check if a malicious package is present??
 
 ```sh
 ➜  sbomgr packages -qN 'abbrev' ~/tmp/app.spdx.json
@@ -145,7 +143,7 @@ packages_matched: 2
 1
 ```
 
-## extract data using user-defined output
+### extract data using user-defined output
 
 ```sh
 sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
@@ -154,7 +152,7 @@ sbomgr packages -O 'toolv,tooln,pkgn,pkgv' ~/tmp/app.spdx.json
 2.0.88	Microsoft.SBOMTool	async-settle                         	1.0.0
 ```
 
-## Using containerized sbomgr
+### Using containerized sbomgr
 
 ```sh
 $docker run [volume-maps] ghcr.io/interlynk-io/sbomgr [command] [options]
@@ -180,14 +178,14 @@ Matching file count: 3153
 Matching package count: 716953
 ```
 
-# Search flags
+## Search flags
 
-## Packages
+### Packages
 
 This section explains the flags relevant to the packages search feature.
 The packages search takes only a single argument, either a file or a directory. There are man flags which can be specified to control its behaviour.
 
-## _Match Criteria_
+### _Match Criteria_
 
 ---
 
@@ -198,19 +196,19 @@ The packages search takes only a single argument, either a file or a directory. 
 
 all of these match criteria are exclusive to each other.
 
-## _Patter Matching_
+### _Patter Matching_
 
 ---
 
 - `-E` or `--extended-regexp` flag can be used to indicate if the match criteria is a regular expression. Syntax supported is https://github.com/google/re2/wiki/Syntax.
 
-## _Matching Control_
+### _Matching Control_
 
 ---
 
 - `-i` or `--ignore-case` case insensitive matching.
 
-## _Output Control_
+### _Output Control_
 
 ---
 
@@ -236,26 +234,26 @@ all of these match criteria are exclusive to each other.
   - `repo` - repository url
   - `direct` - package is a direct dependency
 
-## _Stats Control_
+### _Stats Control_
 
 ---
 
 - `-c` or `--count` suppresses the normal output and print matching counts of sbom filenames and packages.
 
-## _Directory Control_
+### _Directory Control_
 
 ---
 
 - `-r` or `--recurse` when set, recursively scans all sub directories.
 
-## _Spec Control_
+### _Spec Control_
 
 ---
 
 - `--spdx` searches only files which are SPDX.
 - `--cdx` searches only files which are CycloneDX.
 
-# Future work
+## Future work
 
 - Search using files.
 - Search using tool metadata.
@@ -264,34 +262,34 @@ all of these match criteria are exclusive to each other.
 - Search until a specified depth.
 - Provide a list of malicious packages
 
-# SBOM Samples
+## SBOM Samples
 
 - A sample set of SBOM is present in the [samples](https://github.com/interlynk-io/sbomgr/tree/main/samples) directory above.
 - [SBOM Benchmark](https://www.sbombenchmark.dev) is a repository of SBOM and quality score for most popular containers and repositories
 - [SBOM Explorer](https://github.com/interlynk-io/sbomex) is a command line utility to search and pull SBOMs
 
-# Installation
+## Installation
 
-## Using Prebuilt binaries
+### Using Prebuilt binaries
 
 ```console
 https://github.com/interlynk-io/sbomgr/releases
 ```
 
-## Using Homebrew
+### Using Homebrew
 
 ```console
 brew tap interlynk-io/interlynk
 brew install sbomgr
 ```
 
-## Using Go install
+### Using Go install
 
 ```console
 go install github.com/interlynk-io/sbomgr@latest
 ```
 
-## Using repo
+### Using repo
 
 This approach involves cloning the repo and building it.
 
@@ -300,7 +298,7 @@ This approach involves cloning the repo and building it.
 3. make build
 4. To test if the build was successful run the following command `./build/sbomgr version`
 
-# Contributions
+## Contributions
 
 We look forward to your contributions, below are a few guidelines on how to submit them
 
@@ -310,7 +308,7 @@ We look forward to your contributions, below are a few guidelines on how to subm
 - Push your changes (`git push origin feature/new-feature`)
 - Create a new pull-request
 
-# Other SBOM Open Source tools
+## Other SBOM Open Source tools
 
 - [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool for conditional edits and merging of SBOMs
 - [SBOM Seamless Transfer](https://github.com/interlynk-io/sbommv) - A primary tool to transfer SBOM's between different systems.
@@ -318,7 +316,7 @@ We look forward to your contributions, below are a few guidelines on how to subm
 - [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public SBOM repository
 - [SBOM Benchmark](https://www.sbombenchmark.dev) is a repository of SBOM and quality score for most popular containers and repositories
 
-# Contact
+## Contact
 
 We appreciate all feedback. The best ways to get in touch with us:
 
@@ -327,7 +325,7 @@ We appreciate all feedback. The best ways to get in touch with us:
 - 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues)
 - :x: [Follow us on X](https://twitter.com/InterlynkIo)
 
-# Stargazers
+## Stargazers
 
 If you like this project, please support us by starring it.
 
