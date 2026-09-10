@@ -102,6 +102,11 @@ func directComps(bom *cydx.BOM) map[string]bool {
 
 	for _, dep := range *bom.Dependencies {
 		if dep.Ref == priRef {
+			// dependsOn is optional: a component with no dependencies of its
+			// own is written as a bare ref.
+			if dep.Dependencies == nil {
+				break
+			}
 			for _, depComps := range *dep.Dependencies {
 				directComps[depComps] = true
 			}
