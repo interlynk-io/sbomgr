@@ -3,36 +3,115 @@ name: Release | Build Binary
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
 
+env:
+  TOOL_NAME: ${{ github.repository }}
+  LATEST_TAG: v0.0.1
+  SUPPLIER_NAME: Interlynk
+  SUPPLIER_URL: https://interlynk.io
+  MS_SBOM_TOOL_VERSION: "4.1.3"
+  MS_SBOM_TOOL_EXCLUDE_DIRS: "**/samples/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
+  ci-tests:
+    name: Run CI Tests
+    uses: $/.github/workflows/ci.yml
+    permissions:
+      contents: read
+      packages: read
+      security-events: write
+      
   releaser:
+    needs: ci-tests
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
+      attestations: write
+
     steps:
-      - uses: actions/checkout@v3 
+      - name: Harden Runner
+        uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2
         with:
+          egress-policy: audit
+
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
           fetch-depth: 0
-      - run: git fetch --force --tags 
-      - uses: actions/setup-go@v3
+
+      - name: Fetch all tags
+        run: git fetch --force --tags
+
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7
         with:
-          go-version: '>=1.20'
+          go-version-file: 'go.mod'
           check-latest: true
-          cache: true
-      - name: Download syft binary
-        run: curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
-      - name: Run syft
-        run: syft version
-      - name: Goreleaser
-        uses: goreleaser/goreleaser-action@v4
+          cache: false
+
+      - name: Get Tag
+        id: get_tag
+        run: echo "LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo 'v0.0.1')" >> $GITHUB_ENV
+
+      - name: Install GoReleaser
+        uses: goreleaser/goreleaser-action@f06c13b6b1a9625abc9e6e439d9c05a8f2190e94 # v7
         with:
-          install-only: true 
-      - run: go version
-      - run: goreleaser -v 
-      - name: Releaser
-        run: make release 
+          install-only: true
+
+      - name: Verify Go and GoReleaser versions
+        run: |
+          go version
+          goreleaser -v
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Download and verify sbom-tool
+        run: |
+          curl -Lo /tmp/sbom-tool "https://github.com/microsoft/sbom-tool/releases/download/v${{ env.MS_SBOM_TOOL_VERSION }}/sbom-tool-linux-x64"
+          echo "Verifying sbom-tool download..."
+          if [ ! -f /tmp/sbom-tool ]; then
+            echo "Error: sbom-tool download failed"
+            exit 1
+          fi
+          chmod +x /tmp/sbom-tool
+
+      - name: Run GoReleaser
+        run: make release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate SBOM
+        shell: bash
+        env:
+          TOOL_NAME: ${{ env.TOOL_NAME }}
+          LATEST_TAG: ${{ env.LATEST_TAG }}
+          SUPPLIER_NAME: ${{ env.SUPPLIER_NAME }}
+          SUPPLIER_URL: ${{ env.SUPPLIER_URL }}
+          MS_SBOM_TOOL_EXCLUDE_DIRS: ${{ env.MS_SBOM_TOOL_EXCLUDE_DIRS }}
+        run: |
+          mkdir -p sbom-output
+          /tmp/sbom-tool generate \
+            -b sbom-output \
+            -bc . \
+            -pn "${TOOL_NAME}" \
+            -pv "${LATEST_TAG}" \
+            -ps "${SUPPLIER_NAME}" \
+            -nsb "${SUPPLIER_URL}" \
+            -cd "--DirectoryExclusionList ${MS_SBOM_TOOL_EXCLUDE_DIRS}"
+          ls -lR sbom-output
+
+      - name: Upload SBOM as Release Asset
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: sbom
+          path: sbom-output/_manifest/spdx_2.2/manifest.spdx.json
+          if-no-files-found: error
