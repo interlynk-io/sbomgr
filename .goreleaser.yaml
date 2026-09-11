@@ -1,5 +1,7 @@
 project_name: sbomgr
 
+version: 2
+
 env:
   - GO111MODULE=on
 
@@ -12,24 +14,40 @@ gomod:
   proxy: true 
 
 builds:
-  - id: binaries 
-    binary: sbomgr-{{ .Os }}-{{ .Arch }}
-    no_unique_dist_dir: true 
+  - id: sbomgr
+    binary: sbomgr
     main: .
     flags:
-      - -trimpath 
+      - -trimpath
     mod_timestamp: '{{ .CommitTimestamp }}'
     goos:
       - linux
       - darwin
-      - windows 
+      - windows
     goarch:
       - amd64
       - arm64
     ldflags:
-      - "{{ .Env.LDFLAGS }}"
-    env: 
+      - -buildid=
+      - -X sigs.k8s.io/release-utils/version.gitVersion={{ .Version }}
+      - -X sigs.k8s.io/release-utils/version.gitCommit={{ .FullCommit }}
+      - -X sigs.k8s.io/release-utils/version.gitTreeState={{ if .IsGitDirty }}dirty{{ else }}clean{{ end }}
+      - -X sigs.k8s.io/release-utils/version.buildDate={{ .CommitDate }}
+    env:
       - CGO_ENABLED=0
+
+signs:
+  - cmd: cosign
+    env:
+      - COSIGN_EXPERIMENTAL=1
+    signature: "${artifact}.sigstore.json"
+    args:
+      - "sign-blob"
+      - "--bundle=${signature}"
+      - "${artifact}"
+      - "--yes"
+    artifacts: archive
+    output: true
 
 nfpms:
   - id: sbomgr
@@ -37,31 +55,65 @@ nfpms:
     file_name_template: "{{ .ConventionalFileName }}"
     vendor: Interlynk
     homepage: https://interlynk.io
-    maintainer: Interlynk Authors hello@interlynk.io
-    builds:
-      - binaries
+    maintainer: Interlynk Authors <hello@interlynk.io>
     description: SBOM Grep - search through SBOMs
-    license: "Apache License 2.0"
+    license: Apache-2.0
     formats:
       - apk
       - deb
       - rpm
+    bindir: /usr/bin
     contents:
-      - src: /usr/bin/sbomgr-{{ .Os }}-{{ .Arch }}
-        dst: /usr/bin/sbomgr
-        type: "symlink"
+      - src: LICENSE
+        dst: /usr/share/doc/sbomgr/LICENSE
+        file_info:
+          mode: 0644
 
 archives:
-- format: binary
-  name_template: "{{ .Binary }}"
-  allow_different_binary_count: true 
+  - id: sbomgr
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    files:
+      - LICENSE*
+      - README*
+      - CHANGELOG*
+
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
 
 snapshot: 
   name_template: SNAPSHOT-{{ .ShortCommit }}
 
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - '^ci:'
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: Bug Fixes
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: Others
+      order: 999
+
 release:
-  prerelease: allow 
-  draft: true 
+  prerelease: auto
+  draft: true
+  make_latest: true 
 
 
 
